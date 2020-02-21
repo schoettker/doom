@@ -166,7 +166,10 @@
 ;; (setq +word-wrap--enable-visual-fill-mode t)
 (global-visual-line-mode 1)
 
-(setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+(after! magit
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  (setq magit-save-repository-buffers t)
+  )
 
 (defun create-buffer(name)
   (interactive "sEnter name for new buffer: ")

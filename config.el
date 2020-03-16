@@ -105,7 +105,18 @@
         :desc "find file" :n "p" #'+ivy/projectile-find-file
         :desc "find file" :n "f" #'+ivy/projectile-find-file
         :desc "switch project" :n "s" #'counsel-projectile-switch-project)
+
       (:desc "open" :prefix "o"
+        :desc "agenda" :n "a" #'org-agenda-list
+        "A" nil
+        (:prefix ("A" . "org agenda")
+          :desc "Agenda"         "a"  #'org-agenda
+          :desc "Todo list"      "t"  #'org-todo-list
+          :desc "Tags search"    "m"  #'org-tags-view
+          :desc "View search"    "v"  #'org-search-view
+          )
+        :desc "agenda headings" :n "h" #'counsel-org-agenda-headlines
+        :desc "todo's" :n "t" #'org-todo-list
         :desc "open config" :n "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.el")))
       (:desc "window" :prefix "w"
         :desc "close workspace" :n "D" #'eyebrowse-close-window-config

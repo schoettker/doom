@@ -33,6 +33,8 @@
 ;; If you want to change the style of line numbers, change this to `relative' or
 ;; `nil' to disable it:
 (setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-current-absolute nil)
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -50,9 +52,15 @@
 ;;
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
+(setq scroll-margin 5)
+(setq scroll-conservatively most-positive-fixnum)
+(setq undo-tree-auto-save-history nil)
+(setq +doom-dashboard-banner-file (expand-file-name "logo.png" doom-private-dir))
+(global-visual-line-mode 1)
 
-(setq display-line-numbers-type 'relative)
-(setq display-line-numbers-current-absolute nil)
+(put 'narrow-to-defun  'disabled nil)
+(put 'narrow-to-page   'disabled nil)
+(put 'narrow-to-region 'disabled nil)
 
 (def-package! winum :config (winum-mode))
 
@@ -66,13 +74,6 @@
 
 ;; (def-package! smooth-scroll
 ;;   :config (smooth-scroll-mode 1))
-(setq scroll-margin 5)
-(setq scroll-conservatively most-positive-fixnum)
-
-(setq undo-tree-auto-save-history nil)
-(setq +doom-dashboard-banner-file (expand-file-name "logo.png" doom-private-dir))
-
-(global-visual-line-mode 1)
 
 (after! magit
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
@@ -81,10 +82,6 @@
 (after! swiper
   (setq swiper-use-visual-line nil)
   (setq swiper-use-visual-line-p (lambda (a) nil)))
-
-(put 'narrow-to-defun  'disabled nil)
-(put 'narrow-to-page   'disabled nil)
-(put 'narrow-to-region 'disabled nil)
 
 (load! "+functions")
 (load! "+keybindings")

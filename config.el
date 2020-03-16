@@ -88,6 +88,10 @@
         :desc "ag" :n "a" #'ag
         :desc "dired" :n "d" #'dired
         :desc "termite" :n "t" #'open-termite)
+      (:desc "buffer" :prefix "b"
+        ;; :desc "agenda buffer" :n "a" #'(lambda () (interactive) (switch-to-buffer "*Org Agenda*"))
+        :desc "counsel boomarks" :n "j" #'counsel-bookmark
+        :desc "list bookmarks" :n "l" #'list-bookmarks)
       (:desc "e" :prefix "e"
         :desc "next error" :n "n" #'flycheck-next-error
         :desc "prev error" :n "p" #'flycheck-previous-error

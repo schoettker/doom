@@ -9,6 +9,7 @@
   (setq org-hide-leading-stars nil)
   (setq org-hide-leading-stars-before-indent-mode nil)
   (setq org-startup-indented nil)
+  (setq org-deadline-warning-days 7)
   (setq inbox-file (concat org-directory "inbox.org"))
   (setq todos-file (concat org-directory "inbox.org"))
   (setq life-file (concat org-directory "life.org"))

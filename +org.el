@@ -9,6 +9,23 @@
   (setq org-hide-leading-stars nil)
   (setq org-hide-leading-stars-before-indent-mode nil)
   (setq org-startup-indented nil)
+  (setq inbox-file (concat org-directory "inbox.org"))
+  (setq todos-file (concat org-directory "inbox.org"))
+  (setq life-file (concat org-directory "life.org"))
+  (setq work-file (concat org-directory "work.org"))
+  (setq someday-file (concat org-directory "someday.org"))
+  (setq archive-file (concat org-directory "archive.org"))
+  (setq +org-capture-notes-file inbox-file)
+  (setq +org-capture-todo-file todos-file)
+  (setq org-default-notes-file inbox-file)
+
+  (setq org-capture-templates
+        '(("i" "Inbox" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^T \n %i\n")
+          ("l" "Life" entry (file  life-file) "* TODO⚑ %?\nSCHEDULED: %^T \n %i\n")
+          ("s" "Someday" entry (file someday-file) "* TODO⚑ %?\n%i\n")
+          ("t" "Todo" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^T \n %i\n")
+          ("w" "Work" entry (file  work-file) "* TODO⚑ %?\nSCHEDULED: %^T \n %i\n")))
+
 
   (defun export-to-html-light ()
     (interactive)

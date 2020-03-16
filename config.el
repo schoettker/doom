@@ -54,19 +54,7 @@
 (setq display-line-numbers-type 'relative)
 (setq display-line-numbers-current-absolute nil)
 
-(defun add-semicolon ()
-  (interactive)
-  (end-of-line)
-  (when (not (looking-back ";"))
-    (insert ";"))
-  (evil-first-non-blank))
-
 (def-package! winum :config (winum-mode))
-
-(defun open-termite ()
-  (interactive "@")
-  (shell-command (concat "termite"
-                         " > /dev/null 2>&1 & disown") nil nil))
 
 (def-package! eyebrowse
   :defer 2
@@ -81,24 +69,6 @@
 (setq scroll-margin 5)
 (setq scroll-conservatively most-positive-fixnum)
 
-(defun my-change-number-at-point (change)
-  (let ((number (number-at-point))
-        (point (point)))
-    (when number
-      (progn
-        (forward-word)
-        (search-backward (number-to-string number))
-        (replace-match (number-to-string (funcall change number)))
-        (goto-char point)))))
-(defun my-increment-number-at-point ()
-  "Increment number at point like vim's C-a"
-  (interactive)
-  (my-change-number-at-point '1+))
-(defun my-decrement-number-at-point ()
-  "Decrement number at point like vim's C-x"
-  (interactive)
-  (my-change-number-at-point '1-))
-
 (setq undo-tree-auto-save-history nil)
 (setq +doom-dashboard-banner-file (expand-file-name "logo.png" doom-private-dir))
 
@@ -108,11 +78,6 @@
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-save-repository-buffers t))
 
-(defun create-buffer(name)
-  (interactive "sEnter name for new buffer: ")
-  (switch-to-buffer
-   (find-file (concat "/tmp/" name))))
-
 (after! swiper
   (setq swiper-use-visual-line nil)
   (setq swiper-use-visual-line-p (lambda (a) nil)))
@@ -121,5 +86,6 @@
 (put 'narrow-to-page   'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
+(load! "+functions")
 (load! "+keybindings")
 (load! "+org")

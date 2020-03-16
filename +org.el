@@ -16,6 +16,7 @@
   (setq work-file (concat org-directory "work.org"))
   (setq someday-file (concat org-directory "someday.org"))
   (setq archive-file (concat org-directory "archive.org"))
+  (setq brain-file "~/dev/notes/brain.org")
   (setq +org-capture-notes-file inbox-file)
   (setq +org-capture-todo-file todos-file)
   (setq org-default-notes-file inbox-file)
@@ -27,6 +28,8 @@
           ("t" "Todo" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^T \n %i\n")
           ("w" "Work" entry (file  work-file) "* TODO⚑ %?\nSCHEDULED: %^T \n %i\n")))
 
+  (setq org-refile-targets '((org-agenda-files :level . 0)
+                             (brain-file :maxlevel . 3)))
 
   (defun export-to-html-light ()
     (interactive)

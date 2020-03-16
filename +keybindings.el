@@ -59,6 +59,23 @@
         :desc "narrow" :n "n" #'narrow-to-region
         :desc "widen" :n "w" #'widen))
 
+(after! winum
+  (map! :leader
+        (:desc "win 1" :n "1" #'winum-select-window-1)
+        (:desc "win 2" :n "2" #'winum-select-window-2)
+        (:desc "win 3" :n "3" #'winum-select-window-3)
+        (:desc "win 4" :n "4" #'winum-select-window-4)
+        (:desc "win 5" :n "5" #'winum-select-window-5)))
+
+(after! eyebrowse
+  (map!
+   :nvie "M-1" #'eyebrowse-switch-to-window-config-1
+   :nvie "M-2" #'eyebrowse-switch-to-window-config-2
+   :nvie "M-3" #'eyebrowse-switch-to-window-config-3
+   :nvie "M-4" #'eyebrowse-switch-to-window-config-4
+   :nvie "M-5" #'eyebrowse-switch-to-window-config-5
+   ))
+
 ;; Normal/visual mode bindings
 (map! :nv "C-c a" #'my-increment-number-at-point)
 (map! :nv "C-c x" #'my-decrement-number-at-point)

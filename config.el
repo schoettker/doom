@@ -239,3 +239,8 @@
         :desc "narrow" :n "n" #'org-narrow-to-subtree
         )
   )
+
+(after! swiper
+  (setq swiper-use-visual-line nil)
+  (setq swiper-use-visual-line-p (lambda (a) nil)))
+

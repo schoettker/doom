@@ -223,4 +223,12 @@
       )
     (org-html-export-to-html))
 
+  ;; (setq org-todo-keywords (quote((sequence "⚑ Todo" "⚐ In Progress | Waiting" "|" "✔ Done" "✘ Canceled"))))
+  ;; (setq org-todo-keyword-faces
+  ;;       '(("⚑ Todo" . "deep sky blue") ("⚐ In Progress | Waiting" . "orange") ("✔ Done" . "medium spring green") ("✘ Canceled" . (:foreground "red"))))
+  (setq org-todo-keywords (quote((sequence "TODO⚑" "IN-PROGRESS/WAITING⚐" "|" "DONE✔" "CANCELED✘"))))
+  (setq org-todo-keyword-faces
+        '(("TODO⚑" . "deep sky blue") ("IN-PROGRESS/WAITING⚐" . "orange") ("DONE✔" . "medium spring green") ("CANCELED✘" . (:foreground "red"))))
+
+
   )

@@ -120,7 +120,11 @@
         :desc "open config" :n "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.el")))
       (:desc "window" :prefix "w"
         :desc "close workspace" :n "D" #'eyebrowse-close-window-config
-        :desc "maximize buffer" :n "m" #'doom/window-maximize-buffer))
+        :desc "maximize buffer" :n "m" #'doom/window-maximize-buffer)
+      (:desc "z" :prefix "z"
+        :desc "narrow" :n "n" #'narrow-to-region
+        :desc "widen" :n "w" #'widen)
+      )
 
 (map! :nvime "C-`" #'+popup/raise)
 (map! :nvime "C-y" #'yank)

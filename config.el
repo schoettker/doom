@@ -231,4 +231,11 @@
         '(("TODO⚑" . "deep sky blue") ("IN-PROGRESS/WAITING⚐" . "orange") ("DONE✔" . "medium spring green") ("CANCELED✘" . (:foreground "red"))))
 
 
+  (map! :map org-mode-map
+        :localleader
+        :desc "toggle checkbox" :n "c" #'org-toggle-checkbox
+        :desc "todo" :n "t" #'org-insert-todo-heading
+        :desc "link" :n "l" #'org-insert-link
+        :desc "narrow" :n "n" #'org-narrow-to-subtree
+        )
   )

@@ -126,7 +126,6 @@
         :desc "widen" :n "w" #'widen)
       )
 
-(map! :nvime "C-`" #'+popup/raise)
 (map! :nvime "C-y" #'yank)
 (map! :nvme "\\" #'evil-ex-nohighlight)
 (def-package! eyebrowse

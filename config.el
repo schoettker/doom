@@ -244,3 +244,6 @@
   (setq swiper-use-visual-line nil)
   (setq swiper-use-visual-line-p (lambda (a) nil)))
 
+(put 'narrow-to-defun  'disabled nil)
+(put 'narrow-to-page   'disabled nil)
+(put 'narrow-to-region 'disabled nil)

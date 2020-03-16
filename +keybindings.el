@@ -76,6 +76,15 @@
    :nvie "M-5" #'eyebrowse-switch-to-window-config-5
    ))
 
+(after! org
+  (map! :map org-mode-map
+        :localleader
+        :desc "toggle checkbox" :n "c" #'org-toggle-checkbox
+        :desc "todo" :n "t" #'org-insert-todo-heading
+        :desc "link" :n "l" #'org-insert-link
+        :desc "narrow" :n "n" #'org-narrow-to-subtree
+        ))
+
 ;; Normal/visual mode bindings
 (map! :nv "C-c a" #'my-increment-number-at-point)
 (map! :nv "C-c x" #'my-decrement-number-at-point)

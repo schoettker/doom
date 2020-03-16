@@ -75,10 +75,11 @@
   (interactive "@")
   (shell-command (concat "termite"
                          " > /dev/null 2>&1 & disown") nil nil))
+
 (map! :leader
       (:n ":" #'doom/open-scratch-buffer)
       (:n "x" #'counsel-M-x)
-      (:desc "prev buffer" :n "TAB" #'mode-line-other-buffer)
+      (:desc "prev buffer" :n "TAB" #'mode-line-other-buffer) ;; maybe evil-switch-to-window-last-buffer?!
       (:desc "go to char" :n "SPC" #'avy-goto-word-or-subword-1)
       (:desc "add ;" :n "RET" #'add-semicolon-at-eol)
       (:desc "swiper" :n "/" #'counsel-grep-or-swiper)

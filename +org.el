@@ -20,6 +20,8 @@
   (setq +org-capture-notes-file inbox-file)
   (setq +org-capture-todo-file todos-file)
   (setq org-default-notes-file inbox-file)
+  (setq org-agenda-files (list inbox-file life-file work-file someday-file))
+  (setq org-archive-location (concat archive-file "::* From %s"))
 
   (setq org-capture-templates
         '(("i" "Inbox" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^T \n %i\n")

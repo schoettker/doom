@@ -79,6 +79,7 @@
 (after! org
   (map! :map org-mode-map
         :localleader
+        :desc "archive subtree" :n "a" #'org-archive-subtree
         :desc "toggle checkbox" :n "c" #'org-toggle-checkbox
         :desc "todo" :n "t" #'org-insert-todo-heading
         :desc "link" :n "l" #'org-insert-link

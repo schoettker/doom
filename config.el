@@ -53,13 +53,6 @@
 
 (use-package! winum :config (winum-mode))
 
-(use-package! eyebrowse
-  :defer 2
-  :config (eyebrowse-mode t)
-  ;(set-face-foreground 'eyebrowse-mode-line-active "medium turquoise")
-  (set-face-foreground 'eyebrowse-mode-line-active "purple")
-  (setq eyebrowse-mode-line-separator "|")
-  (setq eyebrowse-new-workspace "*doom*"))
 
 ;; (def-package! smooth-scroll
 ;;   :config (smooth-scroll-mode 1))

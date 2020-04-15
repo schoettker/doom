@@ -71,15 +71,6 @@
         (:desc "win 4" :n "4" #'winum-select-window-4)
         (:desc "win 5" :n "5" #'winum-select-window-5)))
 
-(after! eyebrowse
-  (map!
-   :nvie "M-1" #'eyebrowse-switch-to-window-config-1
-   :nvie "M-2" #'eyebrowse-switch-to-window-config-2
-   :nvie "M-3" #'eyebrowse-switch-to-window-config-3
-   :nvie "M-4" #'eyebrowse-switch-to-window-config-4
-   :nvie "M-5" #'eyebrowse-switch-to-window-config-5
-   ))
-
 (after! org
   (map! :map org-mode-map
         :localleader

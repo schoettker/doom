@@ -51,9 +51,9 @@
 (put 'narrow-to-page   'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
-(def-package! winum :config (winum-mode))
+(use-package! winum :config (winum-mode))
 
-(def-package! eyebrowse
+(use-package! eyebrowse
   :defer 2
   :config (eyebrowse-mode t)
   ;(set-face-foreground 'eyebrowse-mode-line-active "medium turquoise")

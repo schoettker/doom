@@ -14,6 +14,10 @@
       (:desc "apps" :prefix "a"
         :desc "ag" :n "a" #'ag
         :desc "dired" :n "d" #'dired
+        ;; :desc "eshell" :n "e" #'+eshell/toggle
+        :desc "toggle vterm" :n "e" #'+vterm/toggle
+        :desc "new vterm" :n "E" #'+vterm/here
+        :desc "fzf" :n "f" #'counsel-fzf
         :desc "termite" :n "t" #'open-termite)
 
       (:desc "buffer" :prefix "b"

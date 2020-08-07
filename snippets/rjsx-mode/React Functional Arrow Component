@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: React Functional Arrow Component
+# key: rfac
+# --
+import React from 'react';
+
+const `(file-name-base)` = () => {
+
+  return (
+    <div>
+      ${}
+    </div>
+  )
+}
+
+export default `(file-name-base)`;

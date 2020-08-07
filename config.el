@@ -90,3 +90,9 @@
 (load! "+functions")
 (load! "+keybindings")
 (load! "+org")
+
+;; (set-cursor-color "magenta")
+;; (setq +evil--default-cursor-color "magenta")
+(setq evil-normal-state-cursor '(box "magenta")
+      evil-insert-state-cursor '(bar "magenta")
+      evil-visual-state-cursor '(hollow "magenta"))

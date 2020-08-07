@@ -66,8 +66,7 @@
           :desc "View search"    "v"  #'org-search-view
           )
         :desc "agenda headings" :n "h" #'counsel-org-agenda-headlines
-        ;; :desc "todo's" :n "t" #'org-todo-list
-        :desc "open brain" :n "b" #'(lambda () (interactive) (find-file "~/dev/notes/brain.org"))
+        :desc "search in digital garden" :n "o" #'(lambda() (interactive) (projectile-find-file-in-directory "~/dev/wiki"))
         :desc "open config" :n "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.el")))
 
       (:desc "window" :prefix "w"

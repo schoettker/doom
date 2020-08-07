@@ -7,6 +7,7 @@
 
       (:desc "prev buffer" :n "TAB" #'mode-line-other-buffer) ;; maybe evil-switch-to-window-last-buffer?!
       (:desc "go to char" :n "SPC" #'avy-goto-word-or-subword-1)
+      ;; (:desc "go to char" :n "SPC" #'avy-goto-char-timer)
       (:desc "add ;" :n "RET" #'add-semicolon-at-eol)
       (:desc "swiper" :n "/" #'counsel-grep-or-swiper)
       (:desc "kill buffer" :n "d" #'kill-this-buffer)

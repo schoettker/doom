@@ -91,6 +91,11 @@
         :desc "archive subtree" :n "a" #'org-archive-subtree
         :desc "schedule" :n "s" #'org-schedule
         :desc "deadline" :n "d" #'org-deadline
+        :desc "babel execute src" :n "b" #'org-babel-execute-src-block
+        ;; :desc "toggle checkbox" :n "c" #'org-toggle-checkbox
+        ;; (:desc "clock" :prefix "c"
+        ;;  :desc "clock-in" :n "i" #'org-clock-in
+        ;;  )
         :desc "todo" :n "t" #'org-insert-todo-heading
         :desc "link" :n "l" #'org-insert-link
         :desc "narrow" :n "n" #'org-narrow-to-subtree

@@ -55,6 +55,7 @@
 (setq scroll-conservatively most-positive-fixnum)
 (setq undo-tree-auto-save-history nil)
 (setq +doom-dashboard-banner-file (expand-file-name "logo.png" doom-private-dir))
+(setq-default tab-width 2)
 (global-visual-line-mode 1)
 
 (put 'narrow-to-defun  'disabled nil)

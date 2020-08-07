@@ -45,6 +45,12 @@
 ;;
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
+
+
+;; transparency
+  (set-frame-parameter (selected-frame) 'alpha '(85 85))
+  (add-to-list 'default-frame-alist '(alpha 85 85))
+
 (setq scroll-margin 5)
 (setq scroll-conservatively most-positive-fixnum)
 (setq undo-tree-auto-save-history nil)

@@ -4,6 +4,7 @@
 (after! org
   (add-hook 'org-agenda-mode-hook (lambda () (visual-line-mode 0)))
   (require 'org-tempo)
+  (setq org-duration-format (quote h:mm))
   (setq org-agenda-sticky t)
   (setq org-adapt-indentation nil)
   (setq org-log-done t)

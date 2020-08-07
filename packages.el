@@ -52,6 +52,9 @@
 ;(package! builtin-package :recipe (:branch "develop"))
 (package! winum)
 (package! ag)
-(package! smooth-scroll)
+(package! leetcode :recipe (:host github :repo "kaiwk/leetcode.el"))
+;; (package! smooth-scroll)
+;; (package! bufler :recipe (:host github :repo "alphapapa/bufler.el" :files (:defaults (:exclude "helm-bufler.el"))))
+(package! emms)
 
-(disable-packages! org-bullets savehist saveplace org-bookmark-heading orgit org-yt)
+(disable-packages! org-bullets org-superstar savehist saveplace org-bookmark-heading orgit org-yt)

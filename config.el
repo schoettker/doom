@@ -64,6 +64,10 @@
 
 (use-package! winum :config (winum-mode))
 
+(after! emms
+  (emms-all)
+  (emms-default-players)
+  (setq emms-source-file-default-directory "~/library/music"))
 
 (after! magit
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)

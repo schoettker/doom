@@ -120,3 +120,6 @@
 (map! :nvme "\\" #'evil-ex-nohighlight)
 (map! :nvime "<f7>" #'+eshell/toggle)
 ;; TODO: bind F8 to compile/recompile
+(map! :nvime "C-w" #'+workspace:delete)
+(map! :nvime "M-TAB" #'+workspace/switch-to)
+

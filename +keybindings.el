@@ -26,6 +26,19 @@
         :desc "counsel boomarks" :n "j" #'counsel-bookmark
         :desc "list bookmarks" :n "l" #'list-bookmarks)
 
+
+      (:desc "EMMS" :prefix "E"
+        :desc "Open/start" :n "e" #'+emms-start-or-playlist
+        :desc "Open/start" :n "E" #'+emms-start-or-playlist
+        :desc "pause/resume" :n "SPC" #'emms-pause
+        :desc "lower volume" :n "9" #'emms-volume-lower
+        :desc "raise volume" :n "0" #'emms-volume-raise
+        :desc "play marked dired files" :n "d" #'emms-play-dired
+        :desc "prev track" :n "p" #'emms-previous
+        :desc "next track" :n "n" #'emms-next
+        :desc "random track" :n "r" #'emms-random
+        :desc "shuffle" :n "s" #'emms-shuffle)
+
       (:desc "e" :prefix "e"
         :desc "next error" :n "n" #'flycheck-next-error
         :desc "prev error" :n "p" #'flycheck-previous-error

@@ -65,9 +65,6 @@
 (use-package! winum :config (winum-mode))
 
 
-;; (def-package! smooth-scroll
-;;   :config (smooth-scroll-mode 1))
-
 (after! magit
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-save-repository-buffers t))

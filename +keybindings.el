@@ -89,7 +89,8 @@
   (map! :map org-mode-map
         :localleader
         :desc "archive subtree" :n "a" #'org-archive-subtree
-        :desc "toggle checkbox" :n "c" #'org-toggle-checkbox
+        :desc "schedule" :n "s" #'org-schedule
+        :desc "deadline" :n "d" #'org-deadline
         :desc "todo" :n "t" #'org-insert-todo-heading
         :desc "link" :n "l" #'org-insert-link
         :desc "narrow" :n "n" #'org-narrow-to-subtree

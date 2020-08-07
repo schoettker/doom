@@ -3,6 +3,7 @@
 (add-hook 'org-mode-hook (lambda () (auto-fill-mode 0)))
 (after! org
   (add-hook 'org-agenda-mode-hook (lambda () (visual-line-mode 0)))
+  (require 'org-tempo)
   (setq org-agenda-sticky t)
   (setq org-adapt-indentation nil)
   (setq org-log-done t)

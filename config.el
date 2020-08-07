@@ -70,6 +70,7 @@
   (setq emms-source-file-default-directory "~/library/music"))
 
 (after! magit
+  (setq git-commit-style-convention-checks '(non-empty-second-line))
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-save-repository-buffers t))
 

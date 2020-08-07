@@ -47,3 +47,5 @@
 (add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
 
 
+;; Automatically clear transaction after adding
+(defadvice ledger-add-transaction (after ledger-add-transaction activate) ( ledger-toggle-current ))

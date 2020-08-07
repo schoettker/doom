@@ -123,3 +123,5 @@
 (map! :nvime "C-w" #'+workspace:delete)
 (map! :nvime "M-TAB" #'+workspace/switch-to)
 
+
+;; z= -> (ispell-word &optional FOLLOWING QUIETLY CONTINUE REGION)

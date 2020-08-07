@@ -66,11 +66,11 @@
           :desc "View search"    "v"  #'org-search-view
           )
         :desc "agenda headings" :n "h" #'counsel-org-agenda-headlines
-        :desc "todo's" :n "t" #'org-todo-list
+        ;; :desc "todo's" :n "t" #'org-todo-list
+        :desc "open brain" :n "b" #'(lambda () (interactive) (find-file "~/dev/notes/brain.org"))
         :desc "open config" :n "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.el")))
 
       (:desc "window" :prefix "w"
-        :desc "close workspace" :n "D" #'eyebrowse-close-window-config
         :desc "maximize buffer" :n "m" #'doom/window-maximize-buffer)
 
       (:desc "z" :prefix "z"

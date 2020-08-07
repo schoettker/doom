@@ -78,6 +78,15 @@
   (setq swiper-use-visual-line nil)
   (setq swiper-use-visual-line-p (lambda (a) nil)))
 
+(use-package leetcode
+  :defer 4
+  :config
+  (setq leetcode-prefer-language "python3")
+  (setq leetcode-prefer-sql "mysql")
+  (setq leetcode-save-solutions t)
+  (setq leetcode-directory "~/dev/ds/leetcode")
+  )
+
 (load! "+functions")
 (load! "+keybindings")
 (load! "+org")

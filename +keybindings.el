@@ -99,7 +99,16 @@
         :desc "todo" :n "t" #'org-insert-todo-heading
         :desc "link" :n "l" #'org-insert-link
         :desc "narrow" :n "n" #'org-narrow-to-subtree
-        ))
+        )
+  )
+
+(after! org-src
+  (map! :map org-src-mode-map
+        :localleader
+        :desc "save source and exit" :n "'" #'org-edit-src-exit
+        )
+  )
+
 
 ;; Normal/visual mode bindings
 (map! :nv "C-c a" #'my-increment-number-at-point)

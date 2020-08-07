@@ -65,4 +65,14 @@
           ("CANCELED✘" . (:foreground "red"))))
 
 
+  (defun krofna-hack ()
+    (when (looking-back (rx "$$ "))
+      (save-excursion
+        (backward-char 1)
+        (org-toggle-latex-fragment))))
+
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (add-hook 'post-self-insert-hook #'krofna-hack 'append 'local)))
   )
+

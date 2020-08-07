@@ -115,6 +115,7 @@
 (map! :nv "C-c x" #'my-decrement-number-at-point)
 (map! :nv "j" #'evil-next-visual-line)
 (map! :nv "k" #'evil-previous-visual-line)
+(map! :nv "gr" #'+lookup/references)
 (map! :nvime "C-y" #'yank)
 (map! :nvme "\\" #'evil-ex-nohighlight)
 (map! :nvime "<f7>" #'+eshell/toggle)

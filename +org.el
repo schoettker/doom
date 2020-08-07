@@ -15,6 +15,7 @@
   (setq org-hide-leading-stars-before-indent-mode nil)
   (setq org-startup-indented nil)
   (setq org-startup-folded t)
+  (setq org-src-window-setup 'current-window)
   (setq org-deadline-warning-days 7)
   (setq inbox-file (concat org-directory "inbox.org"))
   (setq todos-file (concat org-directory "inbox.org"))

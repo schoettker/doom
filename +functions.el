@@ -44,3 +44,6 @@
     (call-interactively #'emms-add-directory)
     (emms)))
 
+(add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
+
+

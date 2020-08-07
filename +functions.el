@@ -36,3 +36,11 @@
   (interactive "sEnter name for new buffer: ")
   (switch-to-buffer
    (find-file (concat "/tmp/" name))))
+
+
+(defun +emms-start-or-playlist ()
+  (interactive)
+  (if (fboundp 'emms) (emms)
+    (call-interactively #'emms-add-directory)
+    (emms)))
+

@@ -31,6 +31,7 @@
   (setq org-default-notes-file inbox-file)
   (setq org-agenda-files (list inbox-file life-file work-file someday-file))
   (setq org-archive-location (concat archive-file "::* From %s"))
+  (setq org-clock-rounding-minutes 5)
 
   (setq org-capture-templates
         '(("i" "Inbox" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")

@@ -45,6 +45,9 @@
         :desc "prev error" :n "p" #'flycheck-previous-error
         :desc "termite" :n "t" #'open-termite)
 
+      (:desc "+file" :prefix "f"
+        :desc "find other window" :n "o" #'find-file-other-window)
+
       (:desc "git" :prefix "g"
         :desc "status" :n "s" #'magit-status)
 

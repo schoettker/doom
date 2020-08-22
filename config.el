@@ -20,7 +20,8 @@
 (setq doom-themes-enable-bold nil)
 ;; (setq doom-theme 'doom-one)
 ;; (setq doom-theme 'doom-gruvbox)
-(setq doom-theme 'doom-horizon)
+;; (setq doom-theme 'doom-horizon)
+(setq doom-theme 'doom-monokai-pro)
 ;; (setq doom-theme 'doom-snazzy)
 ;; (setq doom-theme 'misterioso)
 

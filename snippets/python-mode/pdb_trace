@@ -1,5 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: ipdb trace
+# name: pdb trace
 # key: pdb
 # uuid: pdb
 # group: debug

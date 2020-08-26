@@ -125,6 +125,7 @@
 ;; TODO: bind F8 to compile/recompile
 (map! :nvime "C-w" #'+workspace:delete)
 (map! :nvime "M-TAB" #'+workspace/switch-to)
+(map! :nvime "C-s" #'save-buffer)
 
 
 ;; z= -> (ispell-word &optional FOLLOWING QUIETLY CONTINUE REGION)

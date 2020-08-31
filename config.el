@@ -98,3 +98,21 @@
 (setq evil-normal-state-cursor '(box "magenta")
       evil-insert-state-cursor '(bar "magenta")
       evil-visual-state-cursor '(hollow "magenta"))
+
+
+(custom-set-faces
+  '(ediff-current-diff-A ((t (:background "#87003f"))))
+  '(ediff-fine-diff-A ((t (:background "#c9005e"))))
+  '(ediff-current-diff-Ancestor ((t (:background "#263854"))))
+  '(ediff-current-diff-B ((t (:background "#008758")))) ;; this is good
+  '(ediff-fine-diff-B ((t (:background "#00d188"))))
+  '(ediff-current-diff-C ((t (:background "#c4eeff"))))
+  '(ediff-even-diff-A ((t (:background "#263854"))))
+  '(ediff-even-diff-Ancestor ((t (:background "#263854"))))
+  '(ediff-even-diff-B ((t (:background "#263854"))))
+  '(ediff-even-diff-C ((t (:background "#263854"))))
+  '(ediff-odd-diff-A ((t (:background "#263854"))))
+  '(ediff-odd-diff-Ancestor ((t (:background "#263854"))))
+  '(ediff-odd-diff-B ((t (:background "#263854"))))
+  '(ediff-odd-diff-C ((t (:background "#263854"))))
+ )

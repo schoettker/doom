@@ -114,6 +114,8 @@
 
 
 ;; Normal/visual mode bindings
+(map! :nv "g[" #'git-gutter:previous-hunk)
+(map! :nv "g]" #'git-gutter:next-hunk)
 (map! :nv "C-c a" #'my-increment-number-at-point)
 (map! :nv "C-c x" #'my-decrement-number-at-point)
 (map! :nv "j" #'evil-next-visual-line)

@@ -53,6 +53,7 @@
   (set-frame-parameter (selected-frame) 'alpha '(85 85))
   (add-to-list 'default-frame-alist '(alpha 85 85))
 
+(setq bookmark-default-file (expand-file-name "bookmarks" doom-private-dir))
 (setq scroll-margin 5)
 (setq scroll-conservatively most-positive-fixnum)
 (setq undo-tree-auto-save-history nil)

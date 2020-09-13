@@ -1,0 +1,13 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("Learning Python powerful object-oriented programming by Mark Lutz.pdf"
+ (filename . "~/library/books/Learning Python powerful object-oriented programming by Mark Lutz.pdf")
+ (position . 1)
+ (page . 633)
+ (slice)
+ (size . 1.0)
+ (origin 0.0 . 0.0)
+ (handler . pdf-view-bookmark-jump-handler))
+)

@@ -56,6 +56,7 @@
 
       (:desc "Project" :prefix "p"
         :desc "search in project" :n "/" #'+ivy/project-search
+        :desc "search from current dir" :n "." #'+ivy/project-search-from-cwd
         :desc "find file" :n "p" #'+ivy/projectile-find-file
         :desc "find file" :n "f" #'+ivy/projectile-find-file
         :desc "switch project" :n "s" #'counsel-projectile-switch-project)

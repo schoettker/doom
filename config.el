@@ -147,6 +147,8 @@
 
 
 (custom-set-faces
+  ;; '(default ((t (:background "#292d3e"))))
+  ;; '(hl-line ((t (:background "#292d3e"))))
   '(ediff-current-diff-A ((t (:background "#87003f"))))
   '(ediff-fine-diff-A ((t (:background "#c9005e"))))
   '(ediff-current-diff-Ancestor ((t (:background "#263854"))))

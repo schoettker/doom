@@ -164,3 +164,6 @@
   '(ediff-odd-diff-B ((t (:background "#263854"))))
   '(ediff-odd-diff-C ((t (:background "#263854"))))
  )
+
+
+;; (load-file "~/.doom.d/+misc/beautify-org-exp.el")

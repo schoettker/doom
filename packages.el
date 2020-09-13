@@ -56,5 +56,6 @@
 ;; (package! smooth-scroll)
 ;; (package! bufler :recipe (:host github :repo "alphapapa/bufler.el" :files (:defaults (:exclude "helm-bufler.el"))))
 (package! emms)
+(package! company-ledger)
 
 (disable-packages! org-bullets org-superstar savehist saveplace org-bookmark-heading orgit org-yt)

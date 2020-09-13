@@ -113,6 +113,28 @@
         ;; :i "TAB" #'beancount-tab-dwim
         )
   )
+
+(use-package! company-ledger
+  :ensure company
+  :config
+  (defun company-ledger (command &optional arg &rest ignored)
+    (interactive (list 'interactive))
+    (cl-case command
+      (interactive (company-begin-backend 'company-ledger))
+      (prefix (and (eq major-mode 'beancount-mode)
+                   (company-grab-symbol)
+                   (company-ledger--next-line-empty-p)
+                   (thing-at-point 'line t)))
+      (candidates
+       (cl-remove-if-not
+        (lambda (c) (company-ledger--fuzzy-word-match arg c))
+        (company-ledger--get-all-postings)))
+      (sorted t)))
+
+
+  (after! beancount
+    (set-company-backend! 'beancount-mode '(company-ledger))))
+
 (load! "+functions")
 (load! "+keybindings")
 (load! "+org")

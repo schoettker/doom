@@ -89,6 +89,30 @@
   (setq leetcode-directory "~/dev/ds/leetcode")
   )
 
+(use-package! beancount
+  :load-path "~/.doom.d/+misc"
+  :mode ("\\.beancount\\'" . beancount-mode)
+  :config
+  ;; (setq beancount-electric-currency t)
+  (add-hook 'beancount-mode-hook #'(lambda () (outline-minor-mode)
+                                     ;; (outline-hide-body)
+                                     ))
+
+  (defun beancount-bal ()
+    "Run bean-report bal."
+    (interactive)
+    (let ((compilation-read-command nil))
+      (beancount--run "bean-report"
+                      (file-relative-name buffer-file-name) "bal")))
+  (setq company-idle-delay nil)
+  (map! :map beancount-mode-map
+        :i "TAB" #'company-ledger
+        :i "C-SPC" #'company-ledger
+        :i "C-N" #'company-ledger
+        ;; :n "TAB" #'beancount-align-to-previous-number
+        ;; :i "TAB" #'beancount-tab-dwim
+        )
+  )
 (load! "+functions")
 (load! "+keybindings")
 (load! "+org")

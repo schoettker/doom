@@ -72,7 +72,10 @@
           )
         :desc "agenda headings" :n "h" #'counsel-org-agenda-headlines
         :desc "search in digital garden" :n "o" #'(lambda() (interactive) (projectile-find-file-in-directory "~/dev/brain"))
-        :desc "open config" :n "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.el")))
+        :desc "open config" :n "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.el"))
+        :desc "open books library" :n "b" #'open-books-library
+        :desc "open library" :n "l" #'open-library
+        )
 
       (:desc "window" :prefix "w"
         :desc "maximize buffer" :n "m" #'doom/window-maximize-buffer)

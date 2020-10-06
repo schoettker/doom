@@ -49,3 +49,11 @@
 
 ;; Automatically clear transaction after adding
 (defadvice ledger-add-transaction (after ledger-add-transaction activate) ( ledger-toggle-current ))
+
+(defun open-books-library ()
+  (interactive)
+  (dired "~/library/books"))
+
+(defun open-library ()
+  (interactive)
+  (dired "~/library"))

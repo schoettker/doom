@@ -1,20 +1,28 @@
 ;;; ~/.doom.d/+org.el -*- lexical-binding: t; -*-
+(load-file "~/.doom.d/+misc/beautiful-org.el")
 
 (add-hook 'org-mode-hook (lambda () (auto-fill-mode 0)))
+
 (after! org
   (add-hook 'org-agenda-mode-hook (lambda () (visual-line-mode 0)))
   (require 'org-tempo)
   (setq org-duration-format (quote h:mm))
+  ;; (setq org-ellipsis " ▼ ") ;; folding symbol
+  ;; (setq org-ellipsis "  ")  ;; folding symbol
+  (setq org-ellipsis "  ")  ;; folding symbol
+  (setq org-cycle-separator-lines -1) ;; to not consider blank lines as part of heading and resolve display issue with ellipsis char and []
   (setq org-export-with-clocks t)
   (setq org-export-with-drawers t)
   (setq org-export-with-properties t)
   (setq org-agenda-sticky t)
-  (setq org-adapt-indentation nil)
+  ;; new for nice writing & note taking experience
+  (setq org-adapt-indentation nil) ;; if content below org header should align / get indented
+  (setq org-hide-leading-stars nil)
+  (setq org-startup-indented nil)
+  ;; (setq org-startup-indented t)
   (setq org-log-done t)
   ;; (setq org-list-allow-alphabetical t)
-  (setq org-hide-leading-stars nil)
   (setq org-hide-leading-stars-before-indent-mode nil)
-  (setq org-startup-indented nil)
   (setq org-startup-folded t)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
   (setq org-src-window-setup 'current-window)
@@ -66,14 +74,24 @@
           ("CANCELED✘" . (:foreground "red"))))
 
 
-  (defun krofna-hack ()
-    (when (looking-back (rx "$$ "))
-      (save-excursion
-        (backward-char 1)
-        (org-toggle-latex-fragment))))
+  ;; (defun krofna-hack ()
+  ;;   (when (looking-back (rx "$$ "))
+  ;;     (save-excursion
+  ;;       (backward-char 1)
+  ;;       (org-toggle-latex-fragment))))
 
+  (setq org-agenda-prefix-format '(
+  ;; (agenda  . " %i %-12:c%?-12t% s") ;; file name + org-agenda-entry-type
+  (agenda  . "  • ")
+  (timeline  . "  % s")
+  (todo  . " %i %-12:c")
+  (tags  . " %i %-12:c")
+  (search . " %i %-12:c")))
+
+  ;; (add-hook 'org-mode-hook
+  ;;           (lambda ()
+  ;;             (add-hook 'post-self-insert-hook #'krofna-hack 'append 'local)))
   (add-hook 'org-mode-hook
-            (lambda ()
-              (add-hook 'post-self-insert-hook #'krofna-hack 'append 'local)))
+      (lambda ()
+         (add-hook 'after-save-hook 'org-preview-latex-fragment nil 'make-it-local)))
   )
-

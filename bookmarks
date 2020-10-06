@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Learning Python powerful object-oriented programming by Mark Lutz.pdf"
+(("org-capture-last-stored"
+ (filename . "~/library/Dropbox/org/life.org")
+ (front-context-string . "* TODO⚑ Andrea g")
+ (rear-context-string . "ktioniert doch!\n")
+ (position . 542))
+("Learning Python powerful object-oriented programming by Mark Lutz.pdf"
  (filename . "~/library/books/Learning Python powerful object-oriented programming by Mark Lutz.pdf")
  (position . 1)
  (page . 633)

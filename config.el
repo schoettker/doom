@@ -105,7 +105,7 @@
     (let ((compilation-read-command nil))
       (beancount--run "bean-report"
                       (file-relative-name buffer-file-name) "bal")))
-  (setq company-idle-delay nil)
+
   (map! :map beancount-mode-map
         :i "TAB" #'company-ledger
         :i "C-SPC" #'company-ledger
@@ -132,9 +132,8 @@
         (company-ledger--get-all-postings)))
       (sorted t)))
 
-
   (after! beancount
-    (set-company-backend! 'beancount-mode '(company-ledger))))
+    (set-company-backend! 'beancount-mode 'company-ledger)))
 
 (load! "+functions")
 (load! "+keybindings")
@@ -166,5 +165,3 @@
   '(ediff-odd-diff-C ((t (:background "#263854"))))
  )
 
-
-;; (load-file "~/.doom.d/+misc/beautify-org-exp.el")

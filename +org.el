@@ -95,3 +95,10 @@
       (lambda ()
          (add-hook 'after-save-hook 'org-preview-latex-fragment nil 'make-it-local)))
   )
+
+;; For citations
+(setq org-latex-pdf-process
+      '("pdflatex -interaction nonstopmode -output-directory %o %f"
+        "biber %b"
+        "pdflatex -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -interaction nonstopmode -output-directory %o %f"))

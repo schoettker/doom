@@ -58,6 +58,7 @@
 (setq scroll-conservatively most-positive-fixnum)
 (setq +doom-dashboard-banner-file (expand-file-name "logo.png" doom-private-dir))
 (setq-default tab-width 2)
+(setq tab-width 2)
 (global-visual-line-mode 1)
 
 (put 'narrow-to-defun  'disabled nil)
@@ -90,6 +91,11 @@
   (setq leetcode-save-solutions t)
   (setq leetcode-directory "~/dev/ds/leetcode")
   )
+
+(after! web-mode
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
 
 (use-package! beancount
   :load-path "~/.doom.d/+misc"

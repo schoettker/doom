@@ -3,10 +3,10 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
- (filename . "~/library/Dropbox/org/life.org")
- (front-context-string . "* TODO⚑ Andrea g")
- (rear-context-string . "ktioniert doch!\n")
- (position . 542))
+ (filename . "~/library/Dropbox/org/inbox.org")
+ (front-context-string . "* TODO⚑ Icon Bro")
+ (rear-context-string . "eplace-project/\n")
+ (position . 2198))
 ("Learning Python powerful object-oriented programming by Mark Lutz.pdf"
  (filename . "~/library/books/Learning Python powerful object-oriented programming by Mark Lutz.pdf")
  (position . 1)

@@ -56,7 +56,6 @@
 (setq bookmark-default-file (expand-file-name "bookmarks" doom-private-dir))
 (setq scroll-margin 5)
 (setq scroll-conservatively most-positive-fixnum)
-(setq undo-tree-auto-save-history nil)
 (setq +doom-dashboard-banner-file (expand-file-name "logo.png" doom-private-dir))
 (setq-default tab-width 2)
 (global-visual-line-mode 1)
@@ -76,6 +75,8 @@
   (setq git-commit-style-convention-checks '(non-empty-second-line))
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-save-repository-buffers t))
+
+(after! undo-tree (setq undo-tree-auto-save-history nil))
 
 (after! swiper
   (setq swiper-use-visual-line nil)

@@ -59,4 +59,4 @@
 (package! company-ledger)
 (package! verb)
 
-(disable-packages! org-bullets org-superstar savehist saveplace org-bookmark-heading orgit org-yt)
+(disable-packages! evil-escape org-bullets org-superstar savehist saveplace org-bookmark-heading orgit org-yt)

@@ -172,3 +172,5 @@
   '(ediff-odd-diff-C ((t (:background "#263854"))))
  )
 
+(setq +format-with-lsp nil)
+

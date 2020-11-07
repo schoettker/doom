@@ -172,5 +172,8 @@
   '(ediff-odd-diff-C ((t (:background "#263854"))))
  )
 
+
+ ;; ("components/.+\\.js$" . rjsx-mode)
+
 (setq +format-with-lsp nil)
 

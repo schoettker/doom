@@ -135,3 +135,8 @@
 
 
 ;; z= -> (ispell-word &optional FOLLOWING QUIETLY CONTINUE REGION)
+
+(map! :map c++-mode-map
+      :nvime "<f3>" #'recompile
+      )
+

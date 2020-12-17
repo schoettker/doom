@@ -73,3 +73,8 @@
 ;;         (set (make-local-variable 'compile-command)
 ;;              (format "g++ -g %s -o %s" (buffer-name) (file-name-sans-extension (buffer-name))))))
 
+(add-hook 'ess-mode-hook
+          (lambda ()
+            (outline-minor-mode)
+            (setq-local outline-regexp "## \\* ")
+            ))

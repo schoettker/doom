@@ -57,3 +57,19 @@
 (defun open-library ()
   (interactive)
   (dired "~/library"))
+
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (set (make-local-variable 'compile-command)
+                 (concat "g++ " buffer-file-name " && ./a.out"  ))
+            (flycheck-mode -1)
+            ))
+;; (map! :map c++-mode-map
+;;       :nvime "<f3>" #'compile
+;;       )
+
+;; (add-hook 'c++-mode-hook
+;;       (lambda ()
+;;         (set (make-local-variable 'compile-command)
+;;              (format "g++ -g %s -o %s" (buffer-name) (file-name-sans-extension (buffer-name))))))
+

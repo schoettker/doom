@@ -140,3 +140,11 @@
       :nvime "<f3>" #'recompile
       )
 
+(after! ess
+(map! :map ess-mode-map
+      :ni "<C-return>" #'ess-eval-region-or-line-and-step
+      :n "TAB" #'outline-toggle-children
+      :ni "<f3>" #'ess-eval-line-and-step
+      )
+(map! :map ess-r-mode-map
+      :i "-" #'ess-insert-S-assign))

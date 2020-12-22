@@ -18,7 +18,7 @@
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "Bront" :size 18))
 (setq doom-themes-enable-bold nil)
-(setq doom-theme 'doom-palenight) ; favorite but not good for (e)diffing/magit
+(setq doom-theme 'doom-molokai)
 ;; (setq doom-theme 'doom-horizon) ; 2nd favorite and good for diffing!
 ;; (setq doom-theme 'doom-one) ; probably the best diffing
 

@@ -174,6 +174,13 @@
 
 
  ;; ("components/.+\\.js$" . rjsx-mode)
+(use-package! rjsx-mode
+  :commands rjsx-mode
+  :mode "\\.js$"
+  :mode "components/.+\\.js$"
+  )
+
+
 
 (setq +format-with-lsp nil)
 

@@ -97,6 +97,10 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
 
+(after! typescript-mode
+  (setq typescript-indent-level 2)
+  )
+
 (use-package! beancount
   :load-path "~/.doom.d/+misc"
   :mode ("\\.beancount\\'" . beancount-mode)

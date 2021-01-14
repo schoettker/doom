@@ -93,7 +93,14 @@
   ;;             (add-hook 'post-self-insert-hook #'krofna-hack 'append 'local)))
   (add-hook 'org-mode-hook
       (lambda ()
-         (add-hook 'after-save-hook 'org-preview-latex-fragment nil 'make-it-local)))
+        (add-hook 'after-save-hook 'org-preview-latex-fragment nil 'make-it-local))
+      (when (string-match-p (regexp-quote ".http.org") (buffer-name))
+        (verb-mode 1)
+        (map! :map org-mode-map
+              :nv "C-c C-c" #'verb-send-request-on-point-other-window
+              )
+        )
+      )
   )
 
 ;; For citations

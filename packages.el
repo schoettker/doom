@@ -59,6 +59,7 @@
 (package! company-ledger)
 (package! verb)
 ;; (package! nano-emacs :recipe (:host github :repo "rougier/nano-emacs"))
+(package! visual-regexp-steroids)
 
 
 (disable-packages! evil-escape org-bullets org-superstar savehist saveplace org-bookmark-heading orgit org-yt)

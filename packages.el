@@ -62,4 +62,4 @@
 (package! visual-regexp-steroids)
 
 
-(disable-packages! evil-escape org-bullets org-superstar savehist saveplace org-bookmark-heading orgit org-yt)
+(disable-packages! evil-escape ivy-hydra org-bullets org-superstar savehist saveplace org-bookmark-heading orgit org-yt)

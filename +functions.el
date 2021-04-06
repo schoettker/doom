@@ -7,9 +7,9 @@
     (insert ";"))
   (evil-first-non-blank))
 
-(defun open-termite ()
+(defun open-terminal ()
   (interactive "@")
-  (shell-command (concat "termite"
+  (shell-command (concat "alacritty"
                          " > /dev/null 2>&1 & disown") nil nil))
 
 (defun my-change-number-at-point (change)

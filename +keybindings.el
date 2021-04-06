@@ -20,7 +20,7 @@
         ;; :desc "toggle vterm" :n "e" #'+vterm/toggle
         ;; :desc "new vterm" :n "E" #'+vterm/here
         :desc "fzf" :n "f" #'counsel-fzf
-        :desc "termite" :n "t" #'open-termite)
+        :desc "terminal" :n "t" #'open-terminal)
 
       (:desc "buffer" :prefix "b"
         ;; :desc "agenda buffer" :n "a" #'(lambda () (interactive) (switch-to-buffer "*Org Agenda*"))

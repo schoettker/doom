@@ -16,7 +16,8 @@
 ;; + `doom-big-font' -- used for `doom-big-font-mode'
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Bront" :size 18))
+(setq doom-font (font-spec :family "UbuntuMono Nerd Font Mono" :size 20))
+;; (setq doom-font (font-spec :family "Bront" :size 22))
 (setq doom-themes-enable-bold nil)
 ;; (setq doom-theme 'doom-monokai-pro)
 ;; (setq doom-theme 'doom-molokai)

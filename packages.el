@@ -60,6 +60,8 @@
 (package! verb)
 ;; (package! nano-emacs :recipe (:host github :repo "rougier/nano-emacs"))
 (package! visual-regexp-steroids)
+;; (package! tree-sitter)
+;; (package! tree-sitter-langs)
 
 
 (disable-packages! evil-escape ivy-hydra org-bullets org-superstar savehist saveplace org-bookmark-heading orgit org-yt)

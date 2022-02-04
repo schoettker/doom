@@ -62,6 +62,7 @@
 (package! visual-regexp-steroids)
 ;; (package! tree-sitter)
 ;; (package! tree-sitter-langs)
+(package! dashboard :pin "a18e7440366029fa12e9cb3a6884e657fc78980f")
 
 
 (disable-packages! evil-escape ivy-hydra org-bullets org-superstar savehist saveplace org-bookmark-heading orgit org-yt)

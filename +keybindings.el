@@ -46,7 +46,9 @@
         :desc "termite" :n "t" #'open-termite)
 
       (:desc "+file" :prefix "f"
-        :desc "find other window" :n "o" #'find-file-other-window)
+        :desc "find other window" :n "o" #'find-file-other-window
+        :desc "toggle filetree" :n "t" #'dired-sidebar-toggle-sidebar
+       )
 
       (:desc "git" :prefix "g"
         :desc "status" :n "s" #'magit-status)

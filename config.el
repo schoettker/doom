@@ -217,6 +217,28 @@
   :mode "components/.+\\.js$"
   )
 
+(defun lala (buja)
+
+(search-forward (concat "[" buja "]"))
+(backward-char 3)
+(evil-ret)
+)
+
+(require 'recentf)
+(add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/.local/etc/workspaces/autosave"))
+
+
+(use-package! dashboard
+  :config
+  (advice-add 'dashboard-insert-recents :override #'custom-dashboard-insert-recents)
+  (dashboard-setup-startup-hook)
+  (setq dashboard-center-content t)
+  (setq dashboard-startup-banner (expand-file-name "logo2.png" doom-private-dir))
+  (setq dashboard-set-footer nil)
+  (setq dashboard-items '((recents  . 10)
+                          (projects . 5))))
+
+
 
 
 (setq +format-with-lsp nil)

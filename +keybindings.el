@@ -51,6 +51,8 @@
        )
 
       (:desc "git" :prefix "g"
+        :desc "file diff" :n "d" #'magit-diff-buffer-file
+        :desc "buffer log" :n "l" #'magit-log-buffer-file
         :desc "status" :n "s" #'magit-status)
 
       (:desc "insert" :prefix "i"

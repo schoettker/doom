@@ -149,6 +149,26 @@
 (map! :map ess-r-mode-map
       :i "-" #'ess-insert-S-assign))
 
+         ;; (define-key dashboard-mode-map  (kbd "0") 'lala)
+         ;;
+         (after! dashboard
+(map! :map dashboard-mode-map
+;; #'(lambda () (interactive) (find-file "~/.doom.d/config.el"))
+
+
+      :n "0" #'(lambda () (interactive) (lala "0"))
+      :n "1" #'(lambda () (interactive) (lala "1"))
+      :n "2" #'(lambda () (interactive) (lala "2"))
+      :n "3" #'(lambda () (interactive) (lala "3"))
+      :n "4" #'(lambda () (interactive) (lala "4"))
+      :n "5" #'(lambda () (interactive) (lala "5"))
+      :n "7" #'(lambda () (interactive) (lala "6"))
+      :n "7" #'(lambda () (interactive) (lala "7"))
+      :n "8" #'(lambda () (interactive) (lala "8"))
+      :n "9" #'(lambda () (interactive) (lala "9"))
+      ))
+
+
 (after! browse-kill-ring
   (map! :map browse-kill-ring-mode-map
         :e "<escape>" #'browse-kill-ring-quit

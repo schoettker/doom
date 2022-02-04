@@ -60,9 +60,15 @@
 (package! verb)
 ;; (package! nano-emacs :recipe (:host github :repo "rougier/nano-emacs"))
 (package! visual-regexp-steroids)
-;; (package! tree-sitter)
-;; (package! tree-sitter-langs)
+(package! tree-sitter)
+(package! tree-sitter-langs)
 (package! dashboard :pin "a18e7440366029fa12e9cb3a6884e657fc78980f")
+(package! dired-sidebar)
+(package! all-the-icons-dired)
+(package! browse-kill-ring)
+;; (package! ibuffer-sidebar)
 
+;; (package! my-package
+  ;; :recipe (:local-repo "~/dev/emacs-dashboard"))
 
-(disable-packages! evil-escape ivy-hydra org-bullets org-superstar savehist saveplace org-bookmark-heading orgit org-yt)
+(disable-packages! evil-escape org-bullets org-superstar savehist saveplace org-bookmark-heading orgit org-yt)

@@ -78,3 +78,29 @@
             (outline-minor-mode)
             (setq-local outline-regexp "## \\* ")
             ))
+
+(defun custom-dashboard-insert-recents (list-size)
+  "Add the list of LIST-SIZE items from recently edited files."
+  (setq dashboard--recentf-cache-item-format nil)
+  (recentf-mode)
+  (let ((inhibit-message t) (message-log-max nil)) (recentf-cleanup))
+  (dashboard-insert-section
+   "Recent Files:"
+   (dashboard-shorten-paths recentf-list 'dashboard-recentf-alist 'recents)
+   list-size
+   (dashboard-get-shortcut 'recents)
+   `(lambda (&rest ignore)
+      (find-file-existing (dashboard-expand-path-alist ,el dashboard-recentf-alist)))
+   (let* ((file (dashboard-expand-path-alist el dashboard-recentf-alist))
+          (filename (dashboard-f-filename file))
+          (path (concat "["(concat (substring el 0 1) (concat "] " (dashboard-extract-key-path-alist el dashboard-recentf-alist))))))
+     (cond
+      ((eq dashboard-recentf-show-base 'align)
+       (unless dashboard--recentf-cache-item-format
+         (let* ((len-align (dashboard--align-length-by-type 'recents))
+                (new-fmt (dashboard--generate-align-format
+                          dashboard-recentf-item-format len-align)))
+           (setq dashboard--recentf-cache-item-format new-fmt)))
+       (format dashboard--recentf-cache-item-format filename path))
+      ((null dashboard-recentf-show-base) path)
+      (t (format dashboard-recentf-item-format filename path))))))

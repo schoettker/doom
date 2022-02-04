@@ -84,6 +84,10 @@
       (:desc "window" :prefix "w"
         :desc "maximize buffer" :n "m" #'doom/window-maximize-buffer)
 
+
+      ;; (:desc "yank ring" :n "y" #'counsel-yank-pop)
+      (:desc "yank ring" :n "y" #'browse-kill-ring)
+
       (:desc "z" :prefix "z"
         :desc "narrow" :n "n" #'narrow-to-region
         :desc "widen" :n "w" #'widen))

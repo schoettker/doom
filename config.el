@@ -207,6 +207,9 @@
  )
 
 
+(setq +default-want-RET-continue-comments nil)
+(setq +evil-want-o/O-to-continue-comments nil)
+
  ;; ("components/.+\\.js$" . rjsx-mode)
 (use-package! rjsx-mode
   :commands rjsx-mode

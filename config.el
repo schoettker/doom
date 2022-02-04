@@ -149,6 +149,12 @@
         (company-ledger--get-all-postings)))
       (sorted t)))
 
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
 ;; (use-package! tree-sitter
 ;;   :when (bound-and-true-p module-file-suffix)
 ;;   :hook (prog-mode . tree-sitter-mode)

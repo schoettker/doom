@@ -148,3 +148,13 @@
       )
 (map! :map ess-r-mode-map
       :i "-" #'ess-insert-S-assign))
+
+(after! browse-kill-ring
+  (map! :map browse-kill-ring-mode-map
+        :e "<escape>" #'browse-kill-ring-quit
+        :e "k" #'browse-kill-ring-previous
+        :e "j" #'browse-kill-ring-forward
+        :e "C-p" #'browse-kill-ring-previous
+        :e "C-n" #'browse-kill-ring-forward
+        :e "/" #'browse-kill-ring-occur
+        ))

@@ -256,6 +256,7 @@
         tex-mode         ; latexindent is broken
         c++-mode
         latex-mode))
+
 (use-package! dired-sidebar
   ;; :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
   :commands (dired-sidebar-toggle-sidebar)
@@ -275,3 +276,7 @@
   (setq dired-sidebar-theme 'icons)
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t))
+
+(use-package! browse-kill-ring
+  :config
+  (setq browse-kill-ring-highlight-current-entry t))

@@ -28,7 +28,7 @@
 
 (if (not (display-graphic-p))
     (setq doom-theme 'doom-tokyo-night)
-  (setq doom-theme 'doom-moonlight))
+  (setq doom-theme 'doom-horizon))
 
 
 ;; (setq doom-theme 'doom-palenight)

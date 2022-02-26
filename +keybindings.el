@@ -74,11 +74,11 @@
         :desc "org table" :n "t" #'org-table-create)
 
       (:desc "Project" :prefix "p"
-        :desc "search in project" :n "/" #'+ivy/project-search
+        :desc "search in project" :n "/" #'+default/search-project
         :desc "search from current dir" :n "." #'+default/search-cwd
-        :desc "find file" :n "p" #'+ivy/projectile-find-file
-        :desc "find file" :n "f" #'+ivy/projectile-find-file
-        :desc "switch project" :n "s" #'counsel-projectile-switch-project)
+        :desc "find file" :n "p" #'projectile-find-file
+        :desc "find file" :n "f" #'projectile-find-file
+        :desc "switch project" :n "s" #'projectile-switch-project)
 
       (:desc "open" :prefix "o"
         :desc "agenda" :n "a" #'org-agenda-list

@@ -1,4 +1,19 @@
 ;;; ~/.doom.d/+keybindings.el -*- lexical-binding: t; -*-
+;; (map! [remap describe-bindings] #'embark-bindings
+;;         "C-;"               #'embark-act  ; to be moved to :config default if accepted
+;;         (:map minibuffer-local-map
+;;          "C-;"               #'embark-act
+;;          "C-c C-;"           #'embark-export
+;;          "C-c C-s"           #'embark-collect-snapshot
+;;          :desc "Export to writable buffer" "C-c C-e" #'+vertico/embark-export-write)
+;;         (:leader
+;;          :desc "Actions" "a" #'embark-act))
+
+(map!
+        (:map minibuffer-local-map
+        (:leader
+         :desc "apps" "a" nil)))
+
 
 ;; Leader bindings
 (map! :leader

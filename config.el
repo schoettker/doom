@@ -284,6 +284,8 @@
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t))
 
+(setq ivy-use-selectable-prompt t)
+
 (use-package! browse-kill-ring
   :config
   (setq browse-kill-ring-highlight-current-entry t))

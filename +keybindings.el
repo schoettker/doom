@@ -83,7 +83,8 @@
         )
 
       (:desc "window" :prefix "w"
-        :desc "maximize buffer" :n "m" #'doom/window-maximize-buffer)
+       :desc "add window config to register" :n "a" #'window-configuration-to-register
+       :desc "maximize buffer" :n "m" #'doom/window-maximize-buffer)
 
 
       ;; (:desc "yank ring" :n "y" #'counsel-yank-pop)

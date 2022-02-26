@@ -79,6 +79,7 @@
         :desc "open config" :n "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.el"))
         :desc "open books library" :n "b" #'open-books-library
         :desc "open library" :n "l" #'open-library
+        :desc "open register" :n "r" #'counsel-register
         )
 
       (:desc "window" :prefix "w"

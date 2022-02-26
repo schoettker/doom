@@ -24,7 +24,14 @@
 (setq doom-themes-enable-bold nil)
 ;; (setq doom-theme 'doom-monokai-pro)
 ;; (setq doom-theme 'doom-molokai)
-(setq doom-theme 'doom-palenight)
+;; (setq doom-theme 'doom-moonlight)
+
+(if (not (display-graphic-p))
+    (setq doom-theme 'doom-tokyo-night)
+  (setq doom-theme 'doom-moonlight))
+
+
+;; (setq doom-theme 'doom-palenight)
 ;; (setq doom-theme 'doom-horizon) ; 2nd favorite and good for diffing!
 ;; (setq doom-theme 'doom-one) ; probably the best diffing
 

@@ -289,3 +289,7 @@
 (use-package! browse-kill-ring
   :config
   (setq browse-kill-ring-highlight-current-entry t))
+
+(setq deft-directory "~/dev/brain"
+      deft-extensions '("org" "txt" "md")
+      deft-recursive t)

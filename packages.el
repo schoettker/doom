@@ -67,6 +67,7 @@
 (package! all-the-icons-dired)
 (package! browse-kill-ring)
 ;; (package! ibuffer-sidebar)
+(package! harpoon)
 
 ;; (package! my-package
   ;; :recipe (:local-repo "~/dev/emacs-dashboard"))

@@ -70,6 +70,20 @@
         :desc "buffer log" :n "l" #'magit-log-buffer-file
         :desc "status" :n "s" #'magit-status)
 
+      (:desc "harpoon" :prefix "h"
+        :desc "add" :n "a" #'harpoon-add-file
+        :desc "browse hydra" :n "h" #'harpoon-quick-menu-hydra
+        :desc "harpoon 1" :n "1" #'harpoon-go-to-1
+        :desc "harpoon 2" :n "2" #'harpoon-go-to-2
+        :desc "harpoon 3" :n "3" #'harpoon-go-to-3
+        :desc "harpoon 4" :n "4" #'harpoon-go-to-4
+        :desc "harpoon 5" :n "5" #'harpoon-go-to-5
+        :desc "harpoon 6" :n "6" #'harpoon-go-to-6
+        :desc "harpoon 7" :n "7" #'harpoon-go-to-7
+        :desc "harpoon 8" :n "8" #'harpoon-go-to-8
+        :desc "harpoon 9" :n "9" #'harpoon-go-to-9
+        )
+
       (:desc "insert" :prefix "i"
         :desc "org table" :n "t" #'org-table-create)
 

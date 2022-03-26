@@ -91,9 +91,10 @@
   ;;       (backward-char 1)
   ;;       (org-toggle-latex-fragment))))
 
+(setq org-agenda-scheduled-leaders '("" ""))
   (setq org-agenda-prefix-format '(
-  ;; (agenda  . " %i %-12:c%?-12t% s") ;; file name + org-agenda-entry-type
-  (agenda  . "  • ")
+  (agenda  . " %i %-12:t% s ") ;; file name + org-agenda-entry-type
+  ;; (agenda  . "  • ")
   (timeline  . "  % s")
   (todo  . " %i %-12:c")
   (tags  . " %i %-12:c")

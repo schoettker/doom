@@ -50,6 +50,7 @@
   (setq org-capture-templates
         '(("i" "Inbox" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")
           ("l" "Life" entry (file  life-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")
+          ("j" "Journal" entry (file+olp+datetree journal-file) "* %?\n" :jump-to-captured t)
           ("n" "Note" entry (file  brain-file) "* %?\n %i\n")
           ("s" "Someday" entry (file someday-file) "* TODO⚑ %?\n%i\n")
           ("t" "Todo" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")

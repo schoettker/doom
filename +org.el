@@ -6,7 +6,9 @@
 (after! org
   (add-hook 'org-agenda-mode-hook (lambda () (visual-line-mode 0)))
   (require 'org-tempo)
+  ;; (add-to-list 'org-modules 'org-habit)
   (setq org-duration-format (quote h:mm))
+
   ;; (setq org-ellipsis " ▼ ") ;; folding symbol
   ;; (setq org-ellipsis "  ")  ;; folding symbol
   (setq org-ellipsis " ▼ ")  ;; folding symbol

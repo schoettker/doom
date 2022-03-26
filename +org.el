@@ -48,7 +48,10 @@
   (setq org-clock-rounding-minutes 5)
 
   (setq org-capture-templates
-        '(("i" "Inbox" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")
+        '(
+          ("a" "auto")
+          ("aj" "Auto Journal" plain (file+olp+datetree journal-file) (file "~/library/org-roam/dailyplan-template.txt") :immediate-finish t :jump-to-captured t)
+          ("i" "Inbox" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")
           ("l" "Life" entry (file  life-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")
           ("j" "Journal" entry (file+olp+datetree journal-file) "* %?\n" :jump-to-captured t)
           ("n" "Note" entry (file  brain-file) "* %?\n %i\n")

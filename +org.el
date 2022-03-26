@@ -30,20 +30,35 @@
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
   (setq org-src-window-setup 'current-window)
   (setq org-deadline-warning-days 7)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; For quickly capturing things that will be filtered & planned later ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (setq inbox-file (concat org-directory "inbox.org"))
-  (setq todos-file (concat org-directory "inbox.org"))
-  (setq life-file (concat org-directory "life.org"))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; For daily journaling ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;
   (setq journal-file (concat org-directory "journal.org"))
-  (setq work-file (concat org-directory "work.org"))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; For things that don't have a date and ideas  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (setq someday-file (concat org-directory "someday.org"))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; For scheduled/planned things in the future ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq todo-file (concat org-directory "todo.org"))
+
+
   (setq archive-file (concat org-directory "archive.org"))
-  (setq routine-file (concat org-directory "routine.org"))
-  (setq dailyplan-file (concat org-directory "dailyplan-template.txt"))
-  (setq brain-file "~/dev/notes/brain.org")
+  (setq dailyplan-template (concat org-directory "dailyplan-template.txt"))
+
   (setq +org-capture-notes-file inbox-file)
-  (setq +org-capture-todo-file todos-file)
+  (setq +org-capture-todo-file todo-file)
   (setq org-default-notes-file inbox-file)
-  (setq org-agenda-files (list inbox-file life-file journal-file work-file someday-file routine-file))
+  (setq org-agenda-files (list inbox-file journal-file someday-file todo-file))
   (setq org-archive-location (concat archive-file "::* From %s"))
   (setq org-clock-rounding-minutes 5)
 
@@ -51,16 +66,13 @@
         '(
           ("a" "auto")
           ("aj" "Auto Journal" plain (file+olp+datetree journal-file) (file "~/library/org-roam/dailyplan-template.txt") :immediate-finish t :jump-to-captured t)
-          ("i" "Inbox" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")
-          ("l" "Life" entry (file  life-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")
-          ("j" "Journal" entry (file+olp+datetree journal-file) "* %?\n" :jump-to-captured t)
-          ("n" "Note" entry (file  brain-file) "* %?\n %i\n")
-          ("s" "Someday" entry (file someday-file) "* TODO⚑ %?\n%i\n")
-          ("t" "Todo" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")
-          ("w" "Work" entry (file  work-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")))
 
-  (setq org-refile-targets '((org-agenda-files :level . 0)
-                             (brain-file :maxlevel . 3)))
+          ("i" "Inbox" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")
+          ("j" "Journal" entry (file+olp+datetree journal-file) "* %?\n%i\n" :jump-to-captured t)
+          ("s" "Someday" entry (file someday-file) "* TODO⚑ %?\n%i\n")
+          ("t" "Todo" entry (file  todo-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")))
+
+  (setq org-refile-targets '((org-agenda-files :level . 0)))
 
   (defun export-to-html-light ()
     (interactive)

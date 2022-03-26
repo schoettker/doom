@@ -11,6 +11,7 @@
 
   ;; (setq org-ellipsis " ▼ ") ;; folding symbol
   ;; (setq org-ellipsis "  ")  ;; folding symbol
+  (setq org-log-into-drawer t)
   (setq org-ellipsis " ▼ ")  ;; folding symbol
   (setq org-cycle-separator-lines -1) ;; to not consider blank lines as part of heading and resolve display issue with ellipsis char and []
   (setq org-export-with-clocks t)

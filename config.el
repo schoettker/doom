@@ -293,3 +293,5 @@
 (setq deft-directory "~/dev/brain"
       deft-extensions '("org" "txt" "md")
       deft-recursive t)
+
+(setq split-width-threshold 1 ) ;; Always split in vertical by default

@@ -65,7 +65,7 @@
   (setq org-capture-templates
         '(
           ("a" "auto")
-          ("aj" "Auto Journal" plain (file+olp+datetree journal-file) (file "~/library/org-roam/dailyplan-template.txt") :immediate-finish t :jump-to-captured t)
+          ("aj" "Auto Journal" plain (file+olp+datetree journal-file) (file "~/library/org-brain/dailyplan-template.txt") :immediate-finish t :jump-to-captured t)
 
           ("i" "Inbox" entry (file  inbox-file) "* TODO⚑ %?\nSCHEDULED: %^t \n %i\n")
           ("j" "Journal" entry (file+olp+datetree journal-file) "* %?\n%i\n" :jump-to-captured t)

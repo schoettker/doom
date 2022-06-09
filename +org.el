@@ -128,6 +128,9 @@
   )
 
 ;; For citations
+;; Make sure to have ~biber~ installed
+;; Also add zotero-better-bibtex to customize key format
+;; And use better-biblatex to export
 (setq org-latex-pdf-process
       '("pdflatex -interaction nonstopmode -output-directory %o %f"
         "biber %b"

@@ -20,6 +20,7 @@
 ;; (setq doom-font (font-spec :family "JetBrains Mono" :size 16))
 ;; (setq doom-font (font-spec :family "Borg Sans Mono" :size 16))
 (setq doom-font (font-spec :family "Monaco" :size 20)) ;; taken from Monaco Linux https://github.com/hbin/top-programming-fonts/blob/master/Monaco-Linux.ttf
+;; consider using :size 32 on high dpi
 ;; (setq doom-font (font-spec :family "Bront" :size 22))
 (setq doom-themes-enable-bold nil)
 ;; (setq doom-theme 'doom-monokai-pro)

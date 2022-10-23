@@ -72,4 +72,4 @@
 ;; (package! my-package
   ;; :recipe (:local-repo "~/dev/emacs-dashboard"))
 
-(disable-packages! evil-escape org-bullets org-superstar savehist saveplace org-bookmark-heading orgit org-yt)
+(disable-packages! evil-escape org-bullets savehist saveplace org-bookmark-heading orgit org-yt)

@@ -212,6 +212,9 @@
   '(ediff-odd-diff-Ancestor ((t (:background "#263854"))))
   '(ediff-odd-diff-B ((t (:background "#263854"))))
   '(ediff-odd-diff-C ((t (:background "#263854"))))
+  '(org-level-1 ((t (:foreground "#fab795"))))
+  '(org-level-2 ((t (:foreground "#eecc5f"))))
+  '(org-level-3 ((t (:foreground "#fadad1"))))
  )
 
 

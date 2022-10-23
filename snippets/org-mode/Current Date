@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Current Date
+# uuid: current-date
+# key: date
+# condition: t
+# --
+`(format-time-string "%d/%m/%Y %A")`$0

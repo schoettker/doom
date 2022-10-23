@@ -45,6 +45,7 @@
   ;; For things that don't have a date and ideas  ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (setq someday-file (concat org-directory "someday.org"))
+  (setq spotify-file "~/dev/brain/work/spotify.org")
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; For scheduled/planned things in the future ;;
@@ -58,7 +59,7 @@
   (setq +org-capture-notes-file inbox-file)
   (setq +org-capture-todo-file todo-file)
   (setq org-default-notes-file inbox-file)
-  (setq org-agenda-files (list inbox-file journal-file someday-file todo-file))
+  (setq org-agenda-files (list inbox-file journal-file someday-file todo-file spotify-file))
   (setq org-archive-location (concat archive-file "::* From %s"))
   (setq org-clock-rounding-minutes 5)
 

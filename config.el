@@ -79,6 +79,9 @@
 ;; they are implemented.
 ;;
 ;;
+;;
+;;
+(use-package! winum :config (winum-mode))
 ;; Scroll behavior
 (setq scroll-margin 5)
 (setq scroll-conservatively most-positive-fixnum)

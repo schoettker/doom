@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Lennart Schoettker"
+      user-mail-address "lennartschoettker@hotmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -38,6 +38,8 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
+;; (setq display-line-numbers-current-absolute nil)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -75,3 +77,16 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+;;
+;;
+;; Scroll behavior
+(setq scroll-margin 5)
+(setq scroll-conservatively most-positive-fixnum)
+
+;; Default Tab with
+(setq-default tab-width 2)
+(setq tab-width 2)
+
+;; Dont automatically continue comments after RET/o/O
+(setq +default-want-RET-continue-comments nil)
+(setq +evil-want-o/O-to-continue-comments nil)

@@ -82,6 +82,9 @@
 ;;
 ;;
 (use-package! winum :config (winum-mode))
+;; Load keybindings
+(load! "+keybindings")
+;;
 ;; Scroll behavior
 (setq scroll-margin 5)
 (setq scroll-conservatively most-positive-fixnum)

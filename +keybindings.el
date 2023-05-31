@@ -37,6 +37,11 @@
         :desc "buffer log" :n "l" #'magit-log-buffer-file
         :desc "status" :n "s" #'magit-status)
 
+
+      (:desc "open" :prefix "o"
+        :desc "open config" :n "c" #'doom/open-private-config
+        )
+
       (:desc "Project" :prefix "p"
         :desc "search in project" :n "/" #'+default/search-project
         :desc "search from current dir" :n "." #'+default/search-cwd

@@ -49,6 +49,9 @@
         :desc "find file" :n "f" #'projectile-find-file
         :desc "switch project" :n "s" #'projectile-switch-project)
 
+      (:desc "Toggles" :prefix "t"
+             :desc "Terminal" :n "t" #'shell-pop)
+
       (:desc "window" :prefix "w"
        :desc "add window config to register" :n "a" #'window-configuration-to-register
        :desc "maximize buffer" :n "m" #'doom/window-maximize-buffer)

@@ -1,5 +1,5 @@
 ;;; ~/.doom.d/+org.el -*- lexical-binding: t; -*-
-(load-file "~/.doom.d/+misc/beautiful-org.el")
+;; (load-file "~/.doom.d/+misc/beautiful-org.el")
 
 (add-hook 'org-mode-hook (lambda () (auto-fill-mode 0)))
 

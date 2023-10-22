@@ -19,18 +19,18 @@
 ;; (setq doom-font (font-spec :family "UbuntuMono Nerd Font Mono" :size 20))
 ;; (setq doom-font (font-spec :family "JetBrains Mono" :size 16))
 ;; (setq doom-font (font-spec :family "Borg Sans Mono" :size 16))
-(setq doom-font (font-spec :family "Monaco" :size 20)) ;; taken from Monaco Linux https://github.com/hbin/top-programming-fonts/blob/master/Monaco-Linux.ttf
-;; consider using :size 32 on high dpi
+;; (setq doom-font (font-spec :family "Monaco" :size 15)) ;; taken from Monaco Linux https://github.com/hbin/top-programming-fonts/blob/master/Monaco-Linux.ttf
+(setq doom-font (font-spec :family "MesloLGS NF" :size 15)) ;; taken from Monaco Linux https://github.com/hbin/top-programming-fonts/blob/master/Monaco-Linux.ttf
 ;; (setq doom-font (font-spec :family "Bront" :size 22))
 (setq doom-themes-enable-bold nil)
 ;; (setq doom-theme 'doom-monokai-pro)
 ;; (setq doom-theme 'doom-molokai)
 ;; (setq doom-theme 'doom-moonlight)
 
-(if (not (display-graphic-p))
-    (setq doom-theme 'doom-tokyo-night)
-  (setq doom-theme 'doom-horizon))
-
+;; (if (not (display-graphic-p))
+;;     (setq doom-theme 'doom-tokyo-night)
+;;   (setq doom-theme 'doom-horizon))
+(setq doom-theme 'doom-horizon)
 
 ;; (setq doom-theme 'doom-palenight)
 ;; (setq doom-theme 'doom-horizon) ; 2nd favorite and good for diffing!
@@ -115,30 +115,30 @@
   (setq typescript-indent-level 2)
   )
 
-(use-package! beancount
-  :load-path "~/.doom.d/+misc"
-  :mode ("\\.beancount\\'" . beancount-mode)
-  :config
-  ;; (setq beancount-electric-currency t)
-  (add-hook 'beancount-mode-hook #'(lambda () (outline-minor-mode)
-                                     ;; (outline-hide-body)
-                                     ))
+;; (use-package! beancount
+;;   :load-path "~/.doom.d/+misc"
+;;   :mode ("\\.beancount\\'" . beancount-mode)
+;;   :config
+;;   ;; (setq beancount-electric-currency t)
+;;   (add-hook 'beancount-mode-hook #'(lambda () (outline-minor-mode)
+;;                                      ;; (outline-hide-body)
+;;                                      ))
 
-  (defun beancount-bal ()
-    "Run bean-report bal."
-    (interactive)
-    (let ((compilation-read-command nil))
-      (beancount--run "bean-report"
-                      (file-relative-name buffer-file-name) "bal")))
-
-  (map! :map beancount-mode-map
-        :i "TAB" #'company-ledger
-        :i "C-SPC" #'company-ledger
-        :i "C-N" #'company-ledger
-        ;; :n "TAB" #'beancount-align-to-previous-number
-        ;; :i "TAB" #'beancount-tab-dwim
-        )
-  )
+  ;; (defun beancount-bal ()
+  ;;   "Run bean-report bal."
+  ;;   (interactive)
+  ;;   (let ((compilation-read-command nil))
+  ;;     (beancount--run "bean-report"
+  ;;                     (file-relative-name buffer-file-name) "bal")))
+  ;;
+  ;; (map! :map beancount-mode-map
+  ;;       :i "TAB" #'company-ledger
+  ;;       :i "C-SPC" #'company-ledger
+  ;;       :i "C-N" #'company-ledger
+  ;;       ;; :n "TAB" #'beancount-align-to-previous-number
+  ;;       ;; :i "TAB" #'beancount-tab-dwim
+  ;;       )
+  ;; )
 
 (use-package! company-ledger
   :ensure company
@@ -299,3 +299,6 @@
       deft-recursive t)
 
 (setq split-width-threshold 1 ) ;; Always split in vertical by default
+
+(setenv "JAVA_HOME" "/Users/lschoettker/.sdkman/candidates/java/current")
+;; (setq lsp-java-vmargs '("-noverify" "-Xmx1G" "-XX:+UseG1GC" "-XX:+UseStringDeduplication" "-javaagent:/home/daniel/.m2/repository/org/projectlombok/lombok/1.18.12/lombok-1.18.12.jar" "-Xbootclasspath/a:/home/daniel/.m2/repository/org/projectlombok/lombok/1.18.12/lombok-1.18.12.jar"))

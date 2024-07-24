@@ -86,6 +86,8 @@
 ;;
 ;;
 (use-package! winum :config (winum-mode))
+;; Load functions
+(load! "+functions")
 ;; Load keybindings
 (load! "+keybindings")
 ;;

@@ -90,6 +90,8 @@
 (load! "+functions")
 ;; Load keybindings
 (load! "+keybindings")
+;; Load org mode settings
+;; (load! "+org")
 ;;
 ;; Scroll behavior
 (setq scroll-margin 5)

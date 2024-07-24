@@ -135,3 +135,25 @@
 ;;               ("C-c C-b" . obsidian-backlink-jump)
 ;;               ;; If you prefer you can use `obsidian-insert-link'
 ;;               ("C-c C-l" . obsidian-insert-wikilink)))
+
+;; https://emacs.stackexchange.com/questions/62376/slow-markdown-mode-as-emacs-spends-lots-of-time-fontifying
+;; (defconst markdown-regex-italic
+;;   "\\(?:^\\|[^\\]\\)\\(?1:\\(?2:[_]\\)\\(?3:[^ \n\t\\]\\|[^ \n\t]\\(?:.\\|\n[^\n]\\)[^\\ ]\\)\\(?4:\\2\\)\\)")
+;; and/or
+;; (defconst markdown-regex-gfm-italic
+;;   "\\(?:^\\|[^\\]\\)\\(?1:\\(?2:[_]\\)\\(?3:[^ \\]\\2\\|[^ ]\\(?:.\\|\n[^\n]\\)\\)\\(?4:\\2\\)\\)")
+
+;; https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+;; On new systems run M-x treesit-install-language-grammar to get markdown grammar installed
+;; and check that everything works with (treesit-language-available-p 'markdown)
+(setq treesit-language-source-alist
+      '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+        (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+        (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+(setq major-mode-remap-alist
+      '((yaml-mode . yaml-ts-mode)
+        (bash-mode . bash-ts-mode)
+        ;; check here if its exists https://github.com/emacs-mirror/emacs/tree/master/lisp/textmodes
+        ;; (markdown-mode . tree-sitter-mode) ;; doesnt seem to exist yet
+        ))

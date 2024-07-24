@@ -102,3 +102,8 @@
 ;; Dont automatically continue comments after RET/o/O
 (setq +default-want-RET-continue-comments nil)
 (setq +evil-want-o/O-to-continue-comments nil)
+
+(after! lsp-mode
+  ;; https://github.com/emacs-lsp/lsp-mode/issues/3577#issuecomment-1709232622
+  (delete 'lsp-terraform lsp-client-packages))
+(setenv "PATH" (concat (getenv "PATH") ":/Users/lschoettker/dev/go/bin"))

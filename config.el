@@ -157,3 +157,5 @@
         ;; check here if its exists https://github.com/emacs-mirror/emacs/tree/master/lisp/textmodes
         ;; (markdown-mode . tree-sitter-mode) ;; doesnt seem to exist yet
         ))
+
+(setq tool-bar-mode nil)

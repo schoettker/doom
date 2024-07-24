@@ -2,9 +2,9 @@
 
 ;; Free <leader>a prefix
 (map!
-        (:map minibuffer-local-map
-        (:leader
-         :desc "apps" "a" nil)))
+ (:map minibuffer-local-map
+       (:leader
+        :desc "apps" "a" nil)))
 
 ;; Leader bindings
 (map! :leader
@@ -17,40 +17,41 @@
       (:desc "kill buffer" :n "d" #'kill-this-buffer)
 
       (:desc "apps" :prefix "a"
-        :desc "ag" :n "a" #'ag
-        :desc "dired" :n "d" #'dired
-        :desc "eshell" :n "e" #'+eshell/toggle
-        )
+       :desc "ag" :n "a" #'ag
+       :desc "dired" :n "d" #'dired
+       :desc "eshell" :n "e" #'+eshell/toggle
+       )
 
 
       (:desc "e" :prefix "e"
-        :desc "next error" :n "n" #'flycheck-next-error
-        :desc "prev error" :n "p" #'flycheck-previous-error
-        )
+       :desc "next error" :n "n" #'flycheck-next-error
+       :desc "prev error" :n "p" #'flycheck-previous-error
+       )
 
       (:desc "+file" :prefix "f"
-        :desc "find other window" :n "o" #'find-file-other-window
+       :desc "find other window" :n "o" #'find-file-other-window
        )
 
       (:desc "git" :prefix "g"
-        :desc "file diff" :n "d" #'magit-diff-buffer-file
-        :desc "buffer log" :n "l" #'magit-log-buffer-file
-        :desc "status" :n "s" #'magit-status)
+       :desc "file diff" :n "d" #'magit-diff-buffer-file
+       :desc "buffer log" :n "l" #'magit-log-buffer-file
+       :desc "status" :n "s" #'magit-status)
 
 
       (:desc "open" :prefix "o"
-        :desc "open config" :n "c" #'doom/open-private-config
-        )
+       :desc "open config" :n "c" #'doom/open-private-config
+       :desc "open in obsidian" :n "o" #'open-in-obsidian
+       )
 
       (:desc "Project" :prefix "p"
-        :desc "search in project" :n "/" #'+default/search-project
-        :desc "search from current dir" :n "." #'+default/search-cwd
-        :desc "find file" :n "p" #'projectile-find-file
-        :desc "find file" :n "f" #'projectile-find-file
-        :desc "switch project" :n "s" #'projectile-switch-project)
+       :desc "search in project" :n "/" #'+default/search-project
+       :desc "search from current dir" :n "." #'+default/search-cwd
+       :desc "find file" :n "p" #'projectile-find-file
+       :desc "find file" :n "f" #'projectile-find-file
+       :desc "switch project" :n "s" #'projectile-switch-project)
 
       (:desc "Toggles" :prefix "t"
-             :desc "Terminal" :n "t" #'shell-pop)
+       :desc "Terminal" :n "t" #'shell-pop)
 
       (:desc "window" :prefix "w"
        :desc "add window config to register" :n "a" #'window-configuration-to-register
@@ -59,8 +60,8 @@
       (:desc "yank ring" :n "y" #'browse-kill-ring)
 
       (:desc "z" :prefix "z"
-        :desc "narrow" :n "n" #'narrow-to-region
-        :desc "widen" :n "w" #'widen))
+       :desc "narrow" :n "n" #'narrow-to-region
+       :desc "widen" :n "w" #'widen))
 
 ;; Winum keybidings for switching windows
 (after! winum
@@ -79,6 +80,6 @@
 
 ;; Export current canidates/results (like ivy-occur)
 (map! (:map minibuffer-local-map
-      ;; (:leader
-      ;;  "A" #'embark-dwim)
-       "C-c C-o" #'embark-export))
+            ;; (:leader
+            ;;  "A" #'embark-dwim)
+            "C-c C-o" #'embark-export))

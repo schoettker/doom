@@ -37,7 +37,7 @@
 ;; `load-theme' function. This is the default:
 (if (not (display-graphic-p))
     (setq doom-theme 'doom-monokai-octagon)
-  (setq doom-theme 'doom-palenight))
+  (setq doom-theme 'doom-snazzy))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

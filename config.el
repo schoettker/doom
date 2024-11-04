@@ -168,3 +168,38 @@
 ;; But manually finding some sizes seems to work best for me
 ;; For horizontal, 27":
 (setq default-frame-alist '((top . 70) (left . 70) (width . 200) (height . 50)))
+
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (set (make-local-variable 'compile-command)
+                 (concat "g++ -std=c++17 " buffer-file-name))
+            (flycheck-mode -1)
+            ))
+
+
+(defun eshell-buffer-p (buffer)
+  (string-match-p "^\\*eshell*" (buffer-name buffer)))
+(push #'eshell-buffer-p doom-real-buffer-functions)
+
+(push '("\\*compilation\\*" . (nil (reusable-frames . t))) display-buffer-alist)
+
+
+(set-file-template!
+  "/codeforces/.+\\.cpp$"
+  :trigger
+  "sol")
+
+
+;; (defun compileandrun()
+;;   (interactive)
+;;   (let* ((src (file-name-nondirectory (buffer-file-name)))
+;;          (exe (file-name-sans-extension src)))
+;;     (compile (concat "g++ -std=c++17 " src " -o " exe " && timeout 1s ./" exe ))))
+
+;; (defun execute-c-program ()
+;;   (interactive)
+;;   (defvar foo)
+;;   (setq foo (concat "g++ " (buffer-name) " && ./a.out" ))
+;;   (shell-command foo))
+
+(defvar org-babel-default-header-args:cpp '((:flags . "-std=c++20")))

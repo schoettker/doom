@@ -20,6 +20,7 @@
        :desc "ag" :n "a" #'ag
        :desc "dired" :n "d" #'dired
        :desc "eshell" :n "e" #'+eshell/toggle
+       :desc "Terminal" :n "t" #'+vterm/here
        )
 
 
@@ -41,6 +42,7 @@
       (:desc "open" :prefix "o"
        :desc "open config" :n "c" #'doom/open-private-config
        :desc "open in obsidian" :n "o" #'open-in-obsidian
+       :desc "Terminal" :n "t" #'+vterm/here
        )
 
       (:desc "Project" :prefix "p"
@@ -51,7 +53,9 @@
        :desc "switch project" :n "s" #'projectile-switch-project)
 
       (:desc "Toggles" :prefix "t"
-       :desc "Terminal" :n "t" #'shell-pop)
+       :desc "Terminal" :n "t" #'+vterm/here
+       ;; :desc "Terminal" :n "t" #'shell-pop
+       )
 
       (:desc "window" :prefix "w"
        :desc "add window config to register" :n "a" #'window-configuration-to-register

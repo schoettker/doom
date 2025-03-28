@@ -51,6 +51,8 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
+(setq org-roam-directory "~/org/roam/")
+
 (setq-default org-download-image-dir "~/org/assets")
 (setq org-hide-emphasis-markers t)
 
@@ -96,7 +98,8 @@
 (load! "+keybindings")
 ;; Load org mode settings
 ;; (load! "+org")
-;;
+(load! "+org-minimal")
+(load! "+theme")
 ;; Scroll behavior
 (setq scroll-margin 5)
 (setq scroll-conservatively most-positive-fixnum)
@@ -108,6 +111,7 @@
 ;; Dont automatically continue comments after RET/o/O
 (setq +default-want-RET-continue-comments nil)
 (setq +evil-want-o/O-to-continue-comments nil)
+
 
 (after! lsp-mode
   ;; https://github.com/emacs-lsp/lsp-mode/issues/3577#issuecomment-1709232622

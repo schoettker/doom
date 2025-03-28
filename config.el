@@ -214,3 +214,5 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 
+(use-package! exec-path-from-shell :config (exec-path-from-shell-initialize))
+

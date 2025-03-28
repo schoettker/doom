@@ -174,7 +174,7 @@
 ;; There are some approaches here https://www.reddit.com/r/emacs/comments/9c0a4d/tip_setting_initial_frame_size_and_position/
 ;; But manually finding some sizes seems to work best for me
 ;; For horizontal, 27":
-(setq default-frame-alist '((top . 70) (left . 70) (width . 200) (height . 50)))
+;; (setq default-frame-alist '((top . 70) (left . 70) (width . 200) (height . 50)))
 
 (add-hook 'c++-mode-hook
           (lambda ()
@@ -210,3 +210,7 @@
 ;;   (shell-command foo))
 
 (defvar org-babel-default-header-args:cpp '((:flags . "-std=c++20")))
+
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+

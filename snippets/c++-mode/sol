@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Codeforces Solution Template
+# uuid: codeforces-solution-template
+# key: sol
+# condition: t
+# --
+
+#include <iostream>
+using namespace std;
+
+void solve() {
+  int n;
+  cin >> n;
+  $1
+}
+
+int main() {
+  int tc = 1;
+  for (int t = 1; t <= tc; t++) {
+    solve();
+  }
+}

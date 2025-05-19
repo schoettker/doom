@@ -63,3 +63,4 @@
                    (:exclude ".dir-locals.el" "*-tests.el"))))
 (package! shell-pop :recipe (:repo "kyagi/shell-pop-el"))
 (package! exec-path-from-shell)
+(package! org-modern)

@@ -21,7 +21,18 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;; (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 36))
-(setq doom-font (font-spec :family "MesloLGS NF" :size 20)) ;; taken from Monaco Linux https://github.com/hbin/top-programming-fonts/blob/master/Monaco-Linux.ttf
+;; (setq doom-font (font-spec :family "MesloLGS NF" :size 20)) ;; taken from Monaco Linux https://github.com/hbin/top-programming-fonts/blob/master/Monaco-Linux.ttf
+
+
+(setq doom-font (font-spec :family "JetBrains Mono" :size 24)
+      doom-big-font (font-spec :family "JetBrains Mono" :size 36)
+      doom-variable-pitch-font (font-spec :family "Iowan Old Style" :size 26)
+      ;;doom-symbol-font (font-spec :family "JuliaMono")
+      ;;doom-emoji-font (font-spec :family "Twitter Color Emoji") ; Just used by me
+      ;;doom-serif-font (font-spec :family "IBM Plex Mono" :size 22 :weight 'light)
+      )
+
+
 ;; (setq doom-font (font-spec :family "Excalifont" :size 20)) ;; taken from Monaco Linux https://github.com/hbin/top-programming-fonts/blob/master/Monaco-Linux.ttf
 ;; (setq doom-font (font-spec :family "JetBrains Mono" :size 16)) ;; taken from Monaco Linux https://github.com/hbin/top-programming-fonts/blob/master/Monaco-Linux.ttf
 ;;
@@ -39,8 +50,10 @@
 ;; (if (not (display-graphic-p))
 ;;     (setq doom-theme 'doom-monokai-octagon))
 ;;   (setq doom-theme 'doom-snazzy)
-(setq doom-theme 'doom-monokai-octagon)
+;; (setq doom-theme 'doom-vibrant)
+;; (setq doom-theme 'doom-monokai-octagon)
 ;; (load-theme 'doom-monokai-octagon)
+(setq doom-theme 'doom-tomorrow-day) ;; light theme
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -216,3 +229,100 @@
 
 (use-package! exec-path-from-shell :config (exec-path-from-shell-initialize))
 
+
+;; (setq line-spacing 0.4)
+;; (face-remap-add-relative 'default :family "Iowan Old Style" :height 240)  ;; or some other font
+;; (visual-line-mode +1)
+;; (olivetti-mode +1)
+
+
+;; ressoures
+;; https://tecosaur.github.io/emacs-config/config.html#theme
+;; https://www.reddit.com/r/emacs/comments/hnf3cw/my_orgmode_agenda_much_better_now_with_category/
+;;         https://github.com/psamim/dotfiles/blob/master/doom/config.el#L73
+;; https://github.com/jacmoe/.doom.d/blob/master/config.el
+
+;; Needs brew install git-delta
+(use-package! magit-delta
+  :hook (magit-mode . magit-delta-mode))
+
+
+;; Beautiful Org + Writeroom
+
+;; (defvar mixed-pitch-modes '(org-mode LaTeX-mode markdown-mode gfm-mode Info-mode)
+(defvar mixed-pitch-modes '(LaTeX-mode markdown-mode gfm-mode Info-mode)
+  "Modes that `mixed-pitch-mode' should be enabled in, but only after UI initialisation.")
+(defun init-mixed-pitch-h ()
+  "Hook `mixed-pitch-mode' into each mode in `mixed-pitch-modes'.
+Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
+  (when (memq major-mode mixed-pitch-modes)
+    (mixed-pitch-mode 1))
+  (dolist (hook mixed-pitch-modes)
+    (add-hook (intern (concat (symbol-name hook) "-hook")) #'mixed-pitch-mode)))
+(add-hook 'doom-init-ui-hook #'init-mixed-pitch-h)
+;; (setq! variable-pitch-serif-font (font-spec :family "Alegreya" :size 27))
+(setq! variable-pitch-serif-font (font-spec :family "Iowan Old Style" :size 27))
+
+(after! mixed-pitch
+  (setq mixed-pitch-set-height t)
+  ;; (set-face-attribute 'variable-pitch-serif nil :font variable-pitch-serif-font)
+  (defun mixed-pitch-serif-mode (&optional arg)
+    "Change the default face of the current buffer to a serifed variable pitch, while keeping some faces fixed pitch."
+    (interactive)
+    (let ((mixed-pitch-face 'variable-pitch-serif))
+      (mixed-pitch-mode (or arg 'toggle)))))
+
+
+(setq +zen-text-scale 0.8)
+
+
+
+(defvar +zen-serif-p t
+  "Whether to use a serifed font with `mixed-pitch-mode'.")
+(defvar +zen-org-starhide nil
+  "The value `org-modern-hide-stars' is set to.")
+
+(after! writeroom-mode
+  (defvar-local +zen--original-org-indent-mode-p nil)
+  (defvar-local +zen--original-mixed-pitch-mode-p nil)
+  (defun +zen-enable-mixed-pitch-mode-h ()
+    "Enable `mixed-pitch-mode' when in `+zen-mixed-pitch-modes'."
+    (when (apply #'derived-mode-p +zen-mixed-pitch-modes)
+      (if writeroom-mode
+          (progn
+            (setq +zen--original-mixed-pitch-mode-p mixed-pitch-mode)
+            (funcall (if +zen-serif-p #'mixed-pitch-serif-mode #'mixed-pitch-mode) 1))
+        (funcall #'mixed-pitch-mode (if +zen--original-mixed-pitch-mode-p 1 -1)))))
+  (defun +zen-prose-org-h ()
+    "Reformat the current Org buffer appearance for prose."
+    (when (eq major-mode 'org-mode)
+      (setq
+       display-line-numbers nil
+       visual-fill-column-width 60
+       line-spacing 0.4
+       org-adapt-indentation nil)
+      (when (featurep 'org-modern)
+        (setq-local org-modern-star '("🙘" "🙙" "🙚" "🙛")
+                    ;; org-modern-star '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗")
+                    org-modern-hide-stars +zen-org-starhide)
+        (org-modern-mode -1)
+        (org-modern-mode 1))
+      (setq
+       +zen--original-org-indent-mode-p org-indent-mode)
+      (org-indent-mode -1)))
+  (defun +zen-nonprose-org-h ()
+    "Reverse the effect of `+zen-prose-org'."
+    (when (eq major-mode 'org-mode)
+      (when (bound-and-true-p org-modern-mode)
+        (org-modern-mode -1)
+        (org-modern-mode 1))
+      (when +zen--original-org-indent-mode-p (org-indent-mode 1))))
+  (pushnew! writeroom--local-variables
+            'display-line-numbers
+            'visual-fill-column-width
+            'org-adapt-indentation
+            'org-modern-mode
+            'org-modern-star
+            'org-modern-hide-stars)
+  (add-hook 'writeroom-mode-enable-hook #'+zen-prose-org-h)
+  (add-hook 'writeroom-mode-disable-hook #'+zen-nonprose-org-h))

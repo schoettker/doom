@@ -327,3 +327,14 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
             'org-modern-hide-stars)
   (add-hook 'writeroom-mode-enable-hook #'+zen-prose-org-h)
   (add-hook 'writeroom-mode-disable-hook #'+zen-nonprose-org-h))
+
+(setq initial-buffer-choice "~/org/world.org")
+
+
+;; (use-package! org-notion
+;;   :hook (org-mode . org-notion-mode))
+
+
+;; (use-package! org-notion)
+
+(load! "org-notion")

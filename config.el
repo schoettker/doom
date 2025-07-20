@@ -53,7 +53,8 @@
 ;; (setq doom-theme 'doom-vibrant)
 ;; (setq doom-theme 'doom-monokai-octagon)
 ;; (load-theme 'doom-monokai-octagon)
-(setq doom-theme 'doom-tomorrow-day) ;; light theme
+;; (setq doom-theme 'doom-tomorrow-day) ;; light theme
+(setq doom-theme 'doom-city-lights)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

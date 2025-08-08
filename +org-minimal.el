@@ -8,6 +8,8 @@
   (setq org-agenda-files (list agenda-file))
   (setq org-archive-location (concat archive-file "::* From %s"))
 
+  (setq org-archive-reversed-order t)
+
   (setq org-capture-templates
         '(
           ("a" "auto")

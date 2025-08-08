@@ -63,4 +63,9 @@
                    (:exclude ".dir-locals.el" "*-tests.el"))))
 (package! shell-pop :recipe (:repo "kyagi/shell-pop-el"))
 (package! exec-path-from-shell)
+
+(package! magit-delta :recipe (:host github :repo "dandavison/magit-delta"))
 (package! org-modern)
+
+;; (package! org-notion
+;;   :recipe (:host github :repo "richardwesthaver/org-notion"))

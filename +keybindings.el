@@ -41,7 +41,8 @@
 
       (:desc "open" :prefix "o"
        :desc "open config" :n "c" #'doom/open-private-config
-       :desc "open in obsidian" :n "o" #'open-in-obsidian
+       ;; :desc "open in obsidian" :n "o" #'open-in-obsidian
+       :desc "search org folder files" :n "o" #'+default/find-in-notes
        :desc "Terminal" :n "t" #'+vterm/here
        )
 

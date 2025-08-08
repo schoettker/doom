@@ -66,6 +66,3 @@
 
 (package! magit-delta :recipe (:host github :repo "dandavison/magit-delta"))
 (package! org-modern)
-
-;; (package! org-notion
-;;   :recipe (:host github :repo "richardwesthaver/org-notion"))

@@ -135,20 +135,24 @@ PROJECT-CONFIG should be an entry from `lschoettker/work-projects'."
         (let ((default-directory expanded-path))
           (+vterm/here nil)
           (when dev-cmd
-            (run-at-time 0.5 nil
-                         (lambda ()
-                           (when (get-buffer-process (current-buffer))
-                             (vterm-send-string dev-cmd))))))
+            (let ((vterm-buffer (current-buffer)))
+              (run-at-time 0.5 nil
+                           (lambda ()
+                             (with-current-buffer vterm-buffer
+                               (when (get-buffer-process vterm-buffer)
+                                 (vterm-send-string dev-cmd))))))))
         
         ;; Bottom right terminal with alt command
         (select-window bottom-right-window)
         (let ((default-directory expanded-path))
           (+vterm/here nil)
           (when alt-cmd
-            (run-at-time 0.5 nil
-                         (lambda ()
-                           (when (get-buffer-process (current-buffer))
-                             (vterm-send-string alt-cmd))))))
+            (let ((vterm-buffer (current-buffer)))
+              (run-at-time 0.5 nil
+                           (lambda ()
+                             (with-current-buffer vterm-buffer
+                               (when (get-buffer-process vterm-buffer)
+                                 (vterm-send-string alt-cmd))))))))
         
         ;; Return focus to magit
         (select-window left-window)))))

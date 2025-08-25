@@ -332,4 +332,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
 (use-package! claude-code-ide
   :config
-  (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools
+  (claude-code-ide-emacs-tools-setup)  ; Optionally enable Emacs MCP tools
+  (setq claude-code-ide-terminal-backend 'vterm) ;; Use vterm (or eat)
+  )
+
+

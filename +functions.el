@@ -80,19 +80,19 @@
 (defvar lschoettker/work-projects
   '(("dynamic-user-reporting-forms"
      :path "~/work/dynamic-user-reporting-forms"
-     :dev-cmd "npm run dev"
-     :alt-cmd "npm test")
+     :dev-cmd "pnpm dev"
+     :alt-cmd "pnpm env use 22 --global")
     ("support-site-frontend"
      :path "~/work/support-site-frontend" 
-     :dev-cmd "npm run dev"
-     :alt-cmd "npm run build")
+     :dev-cmd "make start"
+     :alt-cmd "pnpm env use 16 --global")
     ("tintin"
      :path "~/work/tintin"
-     :dev-cmd "make run"
+     :dev-cmd "gcloud beta emulators pubsub start --project=test-project"
      :alt-cmd "make test")
     ("cheerleader"
      :path "~/work/cheerleader"
-     :dev-cmd "# Start development server"
+     :dev-cmd "cloud_sql_proxy -enable_iam_login -instances=toolbox-api:europe-west1:user-reporting=tcp:5432 --token=$(gcloud auth print-access-token --impersonate-service-account=cheerleader@gke-accounts.iam.gserviceaccount.com)"
      :alt-cmd "# Run tests or other commands"))
   "List of work projects with their paths and commands.
 Each project is a list with name followed by plist of :path, :dev-cmd, :alt-cmd.")

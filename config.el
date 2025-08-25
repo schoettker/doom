@@ -337,3 +337,4 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   )
 
 
+(setq +doom-dashboard-pwd-policy "~")

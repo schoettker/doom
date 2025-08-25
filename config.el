@@ -24,7 +24,7 @@
 ;; (setq doom-font (font-spec :family "MesloLGS NF" :size 20)) ;; taken from Monaco Linux https://github.com/hbin/top-programming-fonts/blob/master/Monaco-Linux.ttf
 
 
-(setq doom-font (font-spec :family "JetBrains Mono" :size 24)
+(setq doom-font (font-spec :family "JetBrains Mono" :size 22)
       doom-big-font (font-spec :family "JetBrains Mono" :size 36)
       doom-variable-pitch-font (font-spec :family "Iowan Old Style" :size 26)
       ;;doom-symbol-font (font-spec :family "JuliaMono")

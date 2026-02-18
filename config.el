@@ -330,11 +330,15 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
 ;; (setq initial-buffer-choice "~/org/world.org")
 
-(use-package! claude-code-ide
-  :config
-  (claude-code-ide-emacs-tools-setup)  ; Optionally enable Emacs MCP tools
-  (setq claude-code-ide-terminal-backend 'vterm) ;; Use vterm (or eat)
-  )
+;; (use-package! claude-code-ide
+;;   :config
+;;   (claude-code-ide-emacs-tools-setup)  ; Optionally enable Emacs MCP tools
+;;   (setq claude-code-ide-terminal-backend 'vterm) ;; Use vterm (or eat)
+;;   )
 
 
 (setq +doom-dashboard-pwd-policy "~")
+
+(use-package! claudemacs)
+(with-eval-after-load 'eat
+  (setq eat-term-scrollback-size 400000))

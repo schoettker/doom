@@ -66,4 +66,7 @@
 
 (package! magit-delta :recipe (:host github :repo "dandavison/magit-delta"))
 (package! org-modern)
-(package! claude-code-ide :recipe (:type git :host github :repo "manzaltu/claude-code-ide.el"))
+;; (package! claude-code-ide :recipe (:type git :host github :repo "manzaltu/claude-code-ide.el"))
+
+(package! claudemacs
+  :recipe (:host github :repo "cpoile/claudemacs"))

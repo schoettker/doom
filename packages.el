@@ -68,5 +68,9 @@
 (package! org-modern)
 ;; (package! claude-code-ide :recipe (:type git :host github :repo "manzaltu/claude-code-ide.el"))
 
-(package! claudemacs
-  :recipe (:host github :repo "cpoile/claudemacs"))
+;; (package! claudemacs
+;;   :recipe (:host github :repo "cpoile/claudemacs"))
+
+(package! shell-maker)
+(package! acp)
+(package! agent-shell)

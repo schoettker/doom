@@ -339,6 +339,9 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
 (setq +doom-dashboard-pwd-policy "~")
 
-(use-package! claudemacs)
-(with-eval-after-load 'eat
-  (setq eat-term-scrollback-size 400000))
+;; (use-package! claudemacs)
+;; (with-eval-after-load 'eat
+;;   (setq eat-term-scrollback-size 400000))
+
+(require 'acp)
+(require 'agent-shell)

@@ -1,6 +1,5 @@
 ;;; +functions.el -*- lexical-binding: t; -*-
 
-
 (defun git-root ()
   "Find the root directory of the current git project."
   (let ((default-directory (or (locate-dominating-file default-directory ".git")
@@ -19,71 +18,13 @@
   "Return the current line number in the buffer."
   (line-number-at-pos))
 
-;; (defun url-escape-string (str)
-;;   "Escape special characters in STR for use in a URL."
-;;   (replace-regexp-in-string
-;;    "[^A-Za-z0-9_~.\\-]"
-;;    (lambda (match)
-;;      (format "%%%02x" (string-to-char match)))
-;;    str))
-
-;; (defun create-obsidian-uri ()
-;;   "Create an Obsidian URI string with current file path and line number."
-;;   (let* ((vault "dizzy")
-;;          (file-path (url-escape-string (current-file-relative-path)))
-;;          (line-number (current-line-number)))
-;;     (format "obsidian://advanced-uri?vault=%s&filepath=%s&line=%d"
-;;             vault file-path line-number)))
-
-(defun create-obsidian-uri ()
-  "Create an Obsidian URI string with current file path and line number."
-  (let* ((vault "dizzy")
-         (file-path (url-encode-url (current-file-relative-path)))
-         (line-number (current-line-number)))
-    (format "obsidian://advanced-uri?vault=%s&filepath=%s&line=%d"
-            vault file-path line-number)))
-
-
-(defun show-obsidian-uri ()
-  "Show the Obsidian URI string in the minibuffer."
-  (interactive)
-  (let ((uri (create-obsidian-uri)))
-    (message "Obsidian URI: %s" uri)))
-
-;; (defun open-in-obsidian ()
-;;   "Open Obsidian with the generated Obsidian URI."
-;;   (interactive)
-;;   (let ((obsidian-app "/Applications/Obsidian.app")
-;;         (uri (create-obsidian-uri)))
-;;     (start-process "obsidian" nil "open" "-b" obsidian-app "--args" "--background" uri)))
-
-(defun open-in-obsidian ()
-  "Open Obsidian with the generated Obsidian URI."
-  (interactive)
-  (let ((obsidian-app "/Applications/Obsidian.app")
-        (uri (create-obsidian-uri)))
-    (shell-command (format "open -a %s --background '%s'" obsidian-app uri))))
-
-;; { "-a", "/Applications/Obsidian.app", "--background", "'obsidian://advanced-uri?vault=dizzy&filepath=%F0%9F%97%93%EF%B8%8F%20Journal%2Fweekly%20F2024%2F01-January%2F2024-W02.md&line=39'"
-
-
-;; Emacs Obsidian URI: obsidian://advanced-uri?vault=dizzy&filepath=%1f5d3%fe0f%20Journal%2fdaily%2f2024%2f01-January%2f2024-01-30%20Tuesday.md&line=21
-
-
-;; "'obsidian://advanced-uri?vault=dizzy&filepath=%F0%9F%97%93%EF%B8%8F%20Journal%2Fweekly%2 F2024%2F01-January%2F2024-W02.md&line=39'"
-
-
-;; obsidian://advanced-uri?vault=dizzy&filepath=%F0%9F%97%93%EF%B8%8F%20Journal%2Fweekly%20F2024%2F01-January%2F2024-W02.md&line=39
-;; obsidian://advanced-uri?vault=dizzy&filepath=%1f5d3%fe0f%20Journal%2fdaily%2f2024%2f01-January%2f2024-01-30%20Tuesday.md&line=21
-;; obsidian://advanced-uri?vault=dizzy&filepath=%1f5d3%fe0f%20Journal%2fweekly%2f2024%2f01-January%2f2024-W02.md&line=1
-
 (defvar lschoettker/work-projects
   '(("dynamic-user-reporting-forms"
      :path "~/work/dynamic-user-reporting-forms"
      :dev-cmd "pnpm dev"
      :alt-cmd "pnpm env use 22 --global")
     ("support-site-frontend"
-     :path "~/work/support-site-frontend" 
+     :path "~/work/support-site-frontend"
      :dev-cmd "make start"
      :alt-cmd "pnpm env use 16 --global")
     ("tintin"
@@ -108,28 +49,28 @@ PROJECT-CONFIG should be an entry from `lschoettker/work-projects'."
          (expanded-path (expand-file-name project-path)))
     (unless (file-directory-p expanded-path)
       (user-error "Project directory does not exist: %s" expanded-path))
-    
+
     ;; Switch to project without prompting for a file
     (let ((default-directory expanded-path))
       (projectile-add-known-project expanded-path))
-    
+
     ;; Clear current layout and ensure we start from the left window
     (delete-other-windows)
     (select-window (frame-first-window))
-    
+
     ;; Create vertical split (left for magit, right for terminals)
     (let ((left-window (selected-window))
           (right-window (split-window-right)))
-      
+
       ;; Left side: magit status (ensure we're in left window)
       (select-window left-window)
       (magit-status expanded-path)
-      
+
       ;; Right side: split horizontally for two terminals
       (select-window right-window)
       (let ((top-right-window (selected-window))
             (bottom-right-window (split-window-below)))
-        
+
         ;; Top right terminal with dev command
         (select-window top-right-window)
         (let ((default-directory expanded-path))
@@ -141,7 +82,7 @@ PROJECT-CONFIG should be an entry from `lschoettker/work-projects'."
                              (with-current-buffer vterm-buffer
                                (when (get-buffer-process vterm-buffer)
                                  (vterm-send-string dev-cmd))))))))
-        
+
         ;; Bottom right terminal with alt command
         (select-window bottom-right-window)
         (let ((default-directory expanded-path))
@@ -153,7 +94,7 @@ PROJECT-CONFIG should be an entry from `lschoettker/work-projects'."
                              (with-current-buffer vterm-buffer
                                (when (get-buffer-process vterm-buffer)
                                  (vterm-send-string alt-cmd))))))))
-        
+
         ;; Return focus to magit
         (select-window left-window)))))
 
@@ -166,7 +107,7 @@ PROJECT-CONFIG should be an entry from `lschoettker/work-projects'."
       (+workspace-new project-name)
       (+workspace-switch project-name)
       (lschoettker/setup-project-layout project)))
-  
+
   (message "All work project workspaces have been set up"))
 
 (defun lschoettker/setup-single-work-project (project-name)

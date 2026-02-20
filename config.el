@@ -1,48 +1,16 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Lennart Schoettker"
       user-mail-address "lennartschoettker@hotmail.com")
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-unicode-font' -- for unicode glyphs
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
 ;; (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 36))
-;; (setq doom-font (font-spec :family "MesloLGS NF" :size 20)) ;; taken from Monaco Linux https://github.com/hbin/top-programming-fonts/blob/master/Monaco-Linux.ttf
-
-
-(setq doom-font (font-spec :family "JetBrains Mono" :size 22)
+;; (setq doom-font (font-spec :family "MesloLGS NF" :size 20))
+;; (setq doom-font (font-spec :family "Excalifont" :size 20))
+;; (setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
+;;       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+(setq doom-font (font-spec :family "JetBrains Mono" :size 20)
       doom-big-font (font-spec :family "JetBrains Mono" :size 36)
-      doom-variable-pitch-font (font-spec :family "Iowan Old Style" :size 26)
-      ;;doom-symbol-font (font-spec :family "JuliaMono")
-      ;;doom-emoji-font (font-spec :family "Twitter Color Emoji") ; Just used by me
-      ;;doom-serif-font (font-spec :family "IBM Plex Mono" :size 22 :weight 'light)
-      )
-
-
-;; (setq doom-font (font-spec :family "Excalifont" :size 20)) ;; taken from Monaco Linux https://github.com/hbin/top-programming-fonts/blob/master/Monaco-Linux.ttf
-;; (setq doom-font (font-spec :family "JetBrains Mono" :size 16)) ;; taken from Monaco Linux https://github.com/hbin/top-programming-fonts/blob/master/Monaco-Linux.ttf
-;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
+      doom-variable-pitch-font (font-spec :family "Iowan Old Style" :size 26))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the

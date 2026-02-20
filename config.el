@@ -33,23 +33,22 @@
 (setq org-hide-emphasis-markers t)
 
 (use-package! winum :config (winum-mode))
-;; Load functions
+
+;; Load configuration modules
 (load! "+functions")
-;; Load keybindings
 (load! "+keybindings")
-;; Load org mode settings
-;; (load! "+org")
 (load! "+org-minimal")
 (load! "+theme")
+
 ;; Scroll behavior
 (setq scroll-margin 5)
 (setq scroll-conservatively most-positive-fixnum)
 
-;; Default Tab with
+;; Tab width
 (setq-default tab-width 2)
 (setq tab-width 2)
 
-;; Dont automatically continue comments after RET/o/O
+;; Don't automatically continue comments after RET/o/O
 (setq +default-want-RET-continue-comments nil)
 (setq +evil-want-o/O-to-continue-comments nil)
 

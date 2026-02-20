@@ -19,32 +19,24 @@
       (:desc "apps" :prefix "a"
        :desc "ag" :n "a" #'ag
        :desc "dired" :n "d" #'dired
-       :desc "eshell" :n "e" #'+eshell/toggle
-       :desc "Terminal" :n "t" #'+vterm/here
-       )
-
+       :desc "Terminal" :n "t" #'+vterm/here)
 
       (:desc "e" :prefix "e"
        :desc "next error" :n "n" #'flycheck-next-error
-       :desc "prev error" :n "p" #'flycheck-previous-error
-       )
+       :desc "prev error" :n "p" #'flycheck-previous-error)
 
       (:desc "+file" :prefix "f"
-       :desc "find other window" :n "o" #'find-file-other-window
-       )
+       :desc "find other window" :n "o" #'find-file-other-window)
 
       (:desc "git" :prefix "g"
        :desc "file diff" :n "d" #'magit-diff-buffer-file
        :desc "buffer log" :n "l" #'magit-log-buffer-file
        :desc "status" :n "s" #'magit-status)
 
-
       (:desc "open" :prefix "o"
        :desc "open config" :n "c" #'doom/open-private-config
-       ;; :desc "open in obsidian" :n "o" #'open-in-obsidian
        :desc "search org folder files" :n "o" #'+default/find-in-notes
-       :desc "Terminal" :n "t" #'+vterm/here
-       )
+       :desc "Terminal" :n "t" #'+vterm/here)
 
       (:desc "Project" :prefix "p"
        :desc "search in project" :n "/" #'+default/search-project
@@ -54,9 +46,7 @@
        :desc "switch project" :n "s" #'projectile-switch-project)
 
       (:desc "Toggles" :prefix "t"
-       :desc "Terminal" :n "t" #'+vterm/here
-       ;; :desc "Terminal" :n "t" #'shell-pop
-       )
+       :desc "Terminal" :n "t" #'+vterm/here)
 
       (:desc "window" :prefix "w"
        :desc "add window config to register" :n "a" #'window-configuration-to-register
@@ -68,7 +58,7 @@
        :desc "narrow" :n "n" #'narrow-to-region
        :desc "widen" :n "w" #'widen))
 
-;; Winum keybidings for switching windows
+;; Winum keybindings for switching windows
 (after! winum
   (map! :leader
         (:desc "win 1" :n "1" #'winum-select-window-1)
@@ -77,14 +67,6 @@
         (:desc "win 4" :n "4" #'winum-select-window-4)
         (:desc "win 5" :n "5" #'winum-select-window-5)))
 
-
-;; Normal/visual mode bindings
-(map! :nv "g[" #'git-gutter:previous-hunk)
-(map! :nv "g]" #'git-gutter:next-hunk)
-
-
-;; Export current canidates/results (like ivy-occur)
+;; Export current candidates/results (like ivy-occur)
 (map! (:map minibuffer-local-map
-            ;; (:leader
-            ;;  "A" #'embark-dwim)
             "C-c C-o" #'embark-export))

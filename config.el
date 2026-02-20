@@ -52,61 +52,16 @@
 (setq +default-want-RET-continue-comments nil)
 (setq +evil-want-o/O-to-continue-comments nil)
 
-
-(after! lsp-mode
-  ;; https://github.com/emacs-lsp/lsp-mode/issues/3577#issuecomment-1709232622
-  (delete 'lsp-terraform lsp-client-packages))
 (setenv "PATH" (concat (getenv "PATH") ":/Users/lschoettker/dev/go/bin"))
 
-
-
-;; (use-package obsidian
-;;   :demand t
-;;   :config
-;;   (obsidian-specify-path "~/dizzy")
-;;   (global-obsidian-mode t)
-;;   :custom
-;;   ;; This directory will be used for `obsidian-capture' if set.
-;;   (obsidian-inbox-directory "Inbox")
-;;   ;; Create missing files in inbox? - when clicking on a wiki link
-;;   ;; t: in inbox, nil: next to the file with the link
-;;   ;; default: t
-;;                                         ;(obsidian-wiki-link-create-file-in-inbox nil)
-;;   ;; The directory for daily notes (file name is YYYY-MM-DD.md)
-;;   (obsidian-daily-notes-directory "Daily Notes")
-;;   ;; Directory of note templates, unset (nil) by default
-;;                                         ;(obsidian-templates-directory "Templates")
-;;   ;; Daily Note template name - requires a template directory. Default: Daily Note Template.md
-;;                                         ;(setq obsidian-daily-note-template "Daily Note Template.md")
-;;   :bind (:map obsidian-mode-map
-;;               ;; Replace C-c C-o with Obsidian.el's implementation. It's ok to use another key binding.
-;;               ("C-c C-o" . obsidian-follow-link-at-point)
-;;               ;; Jump to backlinks
-;;               ("C-c C-b" . obsidian-backlink-jump)
-;;               ;; If you prefer you can use `obsidian-insert-link'
-;;               ("C-c C-l" . obsidian-insert-wikilink)))
-
-;; https://emacs.stackexchange.com/questions/62376/slow-markdown-mode-as-emacs-spends-lots-of-time-fontifying
-;; (defconst markdown-regex-italic
-;;   "\\(?:^\\|[^\\]\\)\\(?1:\\(?2:[_]\\)\\(?3:[^ \n\t\\]\\|[^ \n\t]\\(?:.\\|\n[^\n]\\)[^\\ ]\\)\\(?4:\\2\\)\\)")
-;; and/or
-;; (defconst markdown-regex-gfm-italic
-;;   "\\(?:^\\|[^\\]\\)\\(?1:\\(?2:[_]\\)\\(?3:[^ \\]\\2\\|[^ ]\\(?:.\\|\n[^\n]\\)\\)\\(?4:\\2\\)\\)")
-
-;; https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
-;; On new systems run M-x treesit-install-language-grammar to get markdown grammar installed
-;; and check that everything works with (treesit-language-available-p 'markdown)
+;; Tree-sitter grammar sources
 (setq treesit-language-source-alist
       '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-        (markdown "https://github.com/ikatyang/tree-sitter-markdown")
         (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
 (setq major-mode-remap-alist
       '((yaml-mode . yaml-ts-mode)
-        (bash-mode . bash-ts-mode)
-        ;; check here if its exists https://github.com/emacs-mirror/emacs/tree/master/lisp/textmodes
-        ;; (markdown-mode . tree-sitter-mode) ;; doesnt seem to exist yet
-        ))
+        (bash-mode . bash-ts-mode)))
 
 (setq tool-bar-mode nil)
 
@@ -170,104 +125,11 @@
 ;; https://github.com/jacmoe/.doom.d/blob/master/config.el
 
 ;; Needs brew install git-delta
-(use-package! magit-delta
-  :hook (magit-mode . magit-delta-mode))
-
-
-;; Beautiful Org + Writeroom
-
-;; (defvar mixed-pitch-modes '(org-mode LaTeX-mode markdown-mode gfm-mode Info-mode)
-(defvar mixed-pitch-modes '(LaTeX-mode markdown-mode gfm-mode Info-mode)
-  "Modes that `mixed-pitch-mode' should be enabled in, but only after UI initialisation.")
-(defun init-mixed-pitch-h ()
-  "Hook `mixed-pitch-mode' into each mode in `mixed-pitch-modes'.
-Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
-  (when (memq major-mode mixed-pitch-modes)
-    (mixed-pitch-mode 1))
-  (dolist (hook mixed-pitch-modes)
-    (add-hook (intern (concat (symbol-name hook) "-hook")) #'mixed-pitch-mode)))
-(add-hook 'doom-init-ui-hook #'init-mixed-pitch-h)
-;; (setq! variable-pitch-serif-font (font-spec :family "Alegreya" :size 27))
-(setq! variable-pitch-serif-font (font-spec :family "Iowan Old Style" :size 27))
-
-(after! mixed-pitch
-  (setq mixed-pitch-set-height t)
-  ;; (set-face-attribute 'variable-pitch-serif nil :font variable-pitch-serif-font)
-  (defun mixed-pitch-serif-mode (&optional arg)
-    "Change the default face of the current buffer to a serifed variable pitch, while keeping some faces fixed pitch."
-    (interactive)
-    (let ((mixed-pitch-face 'variable-pitch-serif))
-      (mixed-pitch-mode (or arg 'toggle)))))
-
-
-(setq +zen-text-scale 0.8)
-
-
-
-(defvar +zen-serif-p t
-  "Whether to use a serifed font with `mixed-pitch-mode'.")
-(defvar +zen-org-starhide nil
-  "The value `org-modern-hide-stars' is set to.")
-
-(after! writeroom-mode
-  (defvar-local +zen--original-org-indent-mode-p nil)
-  (defvar-local +zen--original-mixed-pitch-mode-p nil)
-  (defun +zen-enable-mixed-pitch-mode-h ()
-    "Enable `mixed-pitch-mode' when in `+zen-mixed-pitch-modes'."
-    (when (apply #'derived-mode-p +zen-mixed-pitch-modes)
-      (if writeroom-mode
-          (progn
-            (setq +zen--original-mixed-pitch-mode-p mixed-pitch-mode)
-            (funcall (if +zen-serif-p #'mixed-pitch-serif-mode #'mixed-pitch-mode) 1))
-        (funcall #'mixed-pitch-mode (if +zen--original-mixed-pitch-mode-p 1 -1)))))
-  (defun +zen-prose-org-h ()
-    "Reformat the current Org buffer appearance for prose."
-    (when (eq major-mode 'org-mode)
-      (setq
-       display-line-numbers nil
-       visual-fill-column-width 60
-       line-spacing 0.4
-       org-adapt-indentation nil)
-      (when (featurep 'org-modern)
-        (setq-local org-modern-star '("🙘" "🙙" "🙚" "🙛")
-                    ;; org-modern-star '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗")
-                    org-modern-hide-stars +zen-org-starhide)
-        (org-modern-mode -1)
-        (org-modern-mode 1))
-      (setq
-       +zen--original-org-indent-mode-p org-indent-mode)
-      (org-indent-mode -1)))
-  (defun +zen-nonprose-org-h ()
-    "Reverse the effect of `+zen-prose-org'."
-    (when (eq major-mode 'org-mode)
-      (when (bound-and-true-p org-modern-mode)
-        (org-modern-mode -1)
-        (org-modern-mode 1))
-      (when +zen--original-org-indent-mode-p (org-indent-mode 1))))
-  (pushnew! writeroom--local-variables
-            'display-line-numbers
-            'visual-fill-column-width
-            'org-adapt-indentation
-            'org-modern-mode
-            'org-modern-star
-            'org-modern-hide-stars)
-  (add-hook 'writeroom-mode-enable-hook #'+zen-prose-org-h)
-  (add-hook 'writeroom-mode-disable-hook #'+zen-nonprose-org-h))
-
 ;; (setq initial-buffer-choice "~/org/world.org")
-
-;; (use-package! claude-code-ide
-;;   :config
-;;   (claude-code-ide-emacs-tools-setup)  ; Optionally enable Emacs MCP tools
-;;   (setq claude-code-ide-terminal-backend 'vterm) ;; Use vterm (or eat)
-;;   )
-
+;; (use-package! magit-delta
+;;   :hook (magit-mode . magit-delta-mode))
 
 (setq +doom-dashboard-pwd-policy "~")
-
-;; (use-package! claudemacs)
-;; (with-eval-after-load 'eat
-;;   (setq eat-term-scrollback-size 400000))
 
 (require 'acp)
 (require 'agent-shell)

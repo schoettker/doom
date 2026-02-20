@@ -22,8 +22,8 @@ The fix (in `config.el`) is threefold:
 3. Create and immediately destroy an invisible GUI frame ("warmup frame") to exercise
    all first-frame initialization codepaths before any real client connects.
 
-Additionally, `persp-mode` (workspaces) has restore/switch hooks that can block frame
-creation, so those are replaced with no-ops.
+Additionally, `persp-mode` (workspaces) session persistence is disabled to prevent
+auto-save/restore of workspace layouts.
 
 ## Components
 
@@ -84,13 +84,6 @@ The `(when (daemonp) ...)` block in `config.el` handles:
 - Warmup frame creation/destruction
 - Removal of blocking `pre-command-hook` chainers
 - Clearing `server-after-make-frame-hook`
-
-### 5. Native compilation disabled
-
-Native comp JIT is disabled (`native-comp-jit-compilation nil`) because the gcc
-toolchain on this system is broken (missing `emutls_w` library). This prevents
-2-second timeouts when Emacs tries to JIT-compile trampolines and fails. To re-enable,
-fix the libgccjit installation and remove the `setq` at the top of `config.el`.
 
 ## First boot after login
 
@@ -166,6 +159,7 @@ the daemon is ready and the warmup frame has already exercised all initializatio
   the daemon.
 - **Stale environment** -- if a newly installed CLI tool isn't found from within Emacs,
   restart the daemon so `exec-path-from-shell` re-reads your PATH.
-- **Native comp errors in logs** -- if you see `emutls_w` or `native-ice` errors, native
-  comp JIT is trying to compile and failing. Ensure `native-comp-jit-compilation` is `nil`
-  in `config.el`, or fix the gcc/libgccjit toolchain.
+- **Native comp errors in logs** -- if you see `emutls_w` or `native-ice` errors in
+  the daemon log, the gcc/libgccjit toolchain may need fixing (e.g. `brew reinstall
+  libgccjit`). These are non-fatal but may cause brief delays on first use of certain
+  functions.

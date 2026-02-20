@@ -1,9 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Disable native compilation — the gcc toolchain is broken on this system
-;; (missing emutls_w library) causing 2s timeouts on JIT trampoline compilation.
-(setq native-comp-jit-compilation nil)
-
 ;; Raise GC threshold to reduce pauses during editing (256MB)
 (setq gc-cons-threshold (* 256 1024 1024))
 
@@ -52,12 +48,10 @@
 (load! "+org-minimal")
 (load! "+theme")
 
-;; Fully disable persp-mode workspace persistence/restore.
+;; Disable workspace session persistence (no auto-save/restore).
 (after! persp-mode
   (setq persp-auto-save-opt 0)
-  (setq persp-auto-resume-time -1)
-  (defun persp-mode-restore-and-remove-from-make-frame-hook (&rest _) nil)
-  (defun persp-server-switch (&rest _) nil))
+  (setq persp-auto-resume-time -1))
 
 ;; Exclude workspace files from recentf (SPC f r)
 (after! recentf

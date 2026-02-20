@@ -75,8 +75,8 @@
 
 ;; Needs brew install git-delta
 ;; (setq initial-buffer-choice "~/org/world.org")
-;; (use-package! magit-delta
-;;   :hook (magit-mode . magit-delta-mode))
+(use-package! magit-delta
+  :hook (magit-mode . magit-delta-mode))
 
 (setq +doom-dashboard-pwd-policy "~")
 

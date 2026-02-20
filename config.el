@@ -1,5 +1,12 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;; Disable native compilation — the gcc toolchain is broken on this system
+;; (missing emutls_w library) causing 2s timeouts on JIT trampoline compilation.
+(setq native-comp-jit-compilation nil)
+
+;; Raise GC threshold to reduce pauses during editing (256MB)
+(setq gc-cons-threshold (* 256 1024 1024))
+
 (setq user-full-name "Lennart Schoettker"
       user-mail-address "lennartschoettker@hotmail.com")
 
@@ -32,7 +39,12 @@
 (setq-default org-download-image-dir "~/org/assets")
 (setq org-hide-emphasis-markers t)
 
-(use-package! winum :config (winum-mode))
+(use-package! winum
+  :defer t
+  :commands (winum-select-window-1 winum-select-window-2
+             winum-select-window-3 winum-select-window-4
+             winum-select-window-5)
+  :init (add-hook 'doom-first-buffer-hook #'winum-mode))
 
 ;; Load configuration modules
 (load! "+functions")
@@ -40,10 +52,12 @@
 (load! "+org-minimal")
 (load! "+theme")
 
-;; Disable automatic workspace session save/restore
+;; Fully disable persp-mode workspace persistence/restore.
 (after! persp-mode
   (setq persp-auto-save-opt 0)
-  (setq persp-auto-resume-time -1))
+  (setq persp-auto-resume-time -1)
+  (defun persp-mode-restore-and-remove-from-make-frame-hook (&rest _) nil)
+  (defun persp-server-switch (&rest _) nil))
 
 ;; Exclude workspace files from recentf (SPC f r)
 (after! recentf
@@ -87,10 +101,35 @@
 (use-package! magit-delta
   :hook (magit-mode . magit-delta-mode))
 
-(setq +doom-dashboard-pwd-policy "~")
+;; (setq +doom-dashboard-pwd-policy "~")
 
-(require 'acp)
-(require 'agent-shell)
+;; Daemon mode optimizations for instant first emacsclient frame.
+(when (daemonp)
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              ;; Eagerly run Doom's deferred init hooks so they don't block
+              ;; on the first client connection.
+              (run-hooks 'doom-first-input-hook
+                         'doom-first-file-hook
+                         'doom-first-buffer-hook)
+              (doom-init-fonts-h)
+              (doom-init-theme-h)
+              (remove-hook 'pre-command-hook #'chain-doom-first-input-hook-to-pre-command-hook-h)
+              (setq server-after-make-frame-hook nil)
+              ;; Warm up: create and destroy a GUI frame so that all the
+              ;; first-frame initialization codepaths are exercised before
+              ;; the first emacsclient connects.
+              (let ((warmup-frame (make-frame '((visibility . nil)
+                                                (width . 80)
+                                                (height . 24)))))
+                (run-hooks 'server-after-make-frame-hook)
+                (delete-frame warmup-frame)))
+            100))
 
-(setq agent-shell-anthropic-default-model-id "claude-opus-4-6")
-(setq agent-shell-session-strategy 'prompt)
+(use-package! acp :defer t)
+(use-package! agent-shell
+  :defer t
+  :commands agent-shell
+  :config
+  (setq agent-shell-anthropic-default-model-id "claude-opus-4-6")
+  (setq agent-shell-session-strategy 'prompt))

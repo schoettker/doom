@@ -8,6 +8,23 @@ A **launchd service** starts Emacs in daemon mode automatically at login. The da
 loads the full Doom config once in the background. After that, `emacsclient` connects
 to the already-running daemon, giving you a fully configured Emacs in under 0.5 seconds.
 
+### The warmup frame trick
+
+Doom Emacs defers a lot of initialization (fonts, theme, package loading) until the
+first frame is created and the first key is pressed. In daemon mode this means the
+first `emacsclient -nw` connection gets a blank screen and hangs until a keypress
+triggers all the deferred init.
+
+The fix (in `config.el`) is threefold:
+1. Eagerly run `doom-first-input-hook`, `doom-first-file-hook`, `doom-first-buffer-hook`
+   during daemon startup so deferred packages load immediately.
+2. Pre-initialize fonts and theme (`doom-init-fonts-h`, `doom-init-theme-h`).
+3. Create and immediately destroy an invisible GUI frame ("warmup frame") to exercise
+   all first-frame initialization codepaths before any real client connects.
+
+Additionally, `persp-mode` (workspaces) has restore/switch hooks that can block frame
+creation, so those are replaced with no-ops.
+
 ## Components
 
 ### 1. LaunchAgent plist
@@ -15,44 +32,73 @@ to the already-running daemon, giving you a fully configured Emacs in under 0.5 
 **File:** `~/Library/LaunchAgents/homebrew.mxcl.emacs-plus@30.plist`
 
 - Runs `/Applications/Emacs.app/Contents/MacOS/Emacs --fg-daemon` at login
-- `KeepAlive: true` — restarts the daemon if it crashes
-- `RunAtLoad: true` — starts automatically on login (no manual action needed)
+- `KeepAlive: true` -- restarts the daemon if it crashes
+- `RunAtLoad: true` -- starts automatically on login (no manual action needed)
 - Logs: `/tmp/homebrew.mxcl.emacs-plus.stderr.log`
 
-### 2. Shell aliases
+**Important:** If you reinstall `emacs-plus` via brew, the binary path may change.
+Update `ProgramArguments` in the plist to match the new location.
+
+### 2. Shell aliases & functions
 
 **File:** `~/dev/dotfiles/zsh/.zshaliases`
 
 ```sh
-alias e="emacsclient -nw -a ''"    # instant terminal emacs
-alias ec="emacsclient -nw -a ''"   # same thing (legacy alias)
+# Opens dired in current dir (no args) or files (with args)
+e() {
+  if [ $# -eq 0 ]; then
+    emacsclient -nw -a '' .
+  else
+    emacsclient -nw -a '' "$@"
+  fi
+}
+alias ec="emacsclient -nw -a ''"
 alias magit='emacsclient -nw -a "" --eval "(magit-status)"'
 alias org='emacsclient -nw -a "" --eval "(+default/find-in-notes)"'
 ```
 
-The `-a ''` flag is the safety net: if the daemon isn't running (e.g. first login
-before launchd kicks in, or after a manual kill), emacsclient will automatically
-start the daemon itself. The first connection in that case takes a few seconds
-while the daemon loads; every subsequent one is instant.
+The `-a ''` flag is the safety net: if the daemon isn't running, emacsclient will
+automatically start it. The first connection in that case takes a few seconds while
+the daemon loads; every subsequent one is instant.
 
-### 3. Doom binary PATH
+### 3. Shell exports
 
 **File:** `~/dev/dotfiles/zsh/.zshexports`
 
 ```sh
+export EDITOR="emacsclient -nw -a ''"
+export GIT_EDITOR="emacsclient -nw -a ''"
+export MANPAGER="emacsclient -nw -a '' --eval '(let ((b (man \"-l -\"))) (select-window (get-buffer-window b)))'"
 export PATH="$PATH:$HOME/.config/emacs/bin"
 ```
 
-This makes `doom sync`, `doom doctor`, etc. available from any terminal.
+This makes `e` the default editor for `git commit`, `Ctrl-g` in Claude, `man` pages,
+and any other tool that respects `$EDITOR`. The PATH entry makes `doom` CLI commands
+available from any terminal.
+
+### 4. Daemon config in config.el
+
+The `(when (daemonp) ...)` block in `config.el` handles:
+- Eager hook execution (deferred init)
+- Font/theme pre-initialization
+- Warmup frame creation/destruction
+- Removal of blocking `pre-command-hook` chainers
+- Clearing `server-after-make-frame-hook`
+
+### 5. Native compilation disabled
+
+Native comp JIT is disabled (`native-comp-jit-compilation nil`) because the gcc
+toolchain on this system is broken (missing `emutls_w` library). This prevents
+2-second timeouts when Emacs tries to JIT-compile trampolines and fails. To re-enable,
+fix the libgccjit installation and remove the `setq` at the top of `config.el`.
 
 ## First boot after login
 
 The launchd service starts the daemon immediately at login (`RunAtLoad: true`).
-Doom's full config typically loads in 3-8 seconds. By the time you open a terminal
-and type `e`, the daemon is almost certainly ready. If you're exceptionally fast and
-beat the daemon, the `-a ''` fallback kicks in and starts it for you (one-time delay).
+Doom's config loads in ~1.2 seconds. By the time you open a terminal and type `e`,
+the daemon is ready and the warmup frame has already exercised all initialization.
 
-**In practice: yes, `e` is instant from the very first terminal you open.**
+**In practice: `e` is instant from the very first terminal you open.**
 
 ## Maintenance
 
@@ -70,7 +116,7 @@ beat the daemon, the `-a ''` fallback kicks in and starts it for you (one-time d
 - **Config changes require a reload.** The daemon loads your Doom config once at startup.
   If you edit `config.el`, `+keybindings.el`, etc., the running daemon won't pick up the
   changes. You have two options:
-  - **From inside Emacs:** `SPC h r r` (`doom/reload`) — reloads most config without
+  - **From inside Emacs:** `SPC h r r` (`doom/reload`) -- reloads most config without
     restarting. Works for variable changes, keybinding tweaks, and theme adjustments.
   - **Full restart:** needed after `doom sync` (new packages, module changes in `init.el`).
     Use `launchctl kickstart -k gui/$(id -u)/homebrew.mxcl.emacs-plus@30` to restart
@@ -82,7 +128,7 @@ beat the daemon, the `-a ''` fallback kicks in and starts it for you (one-time d
 
 - **All clients share one Emacs process.** Every `e`, `magit`, `Ctrl-g` editor session,
   and `man` page connects to the same daemon. This means:
-  - Buffers are shared — a file opened in one terminal is visible in another.
+  - Buffers are shared -- a file opened in one terminal is visible in another.
   - Killing a buffer in one client affects all clients.
   - Variables and state are global across all connections.
   - This is a feature (shared clipboard, undo history, etc.) but can be surprising.
@@ -98,21 +144,28 @@ beat the daemon, the `-a ''` fallback kicks in and starts it for you (one-time d
 
 - **Theme may look different in terminal vs GUI.** The daemon can serve both GUI frames
   (`emacsclient -c`) and terminal frames (`emacsclient -nw`). Terminal frames have limited
-  color support. If the theme looks off in the terminal, this is expected — 256-color
+  color support. If the theme looks off in the terminal, this is expected -- 256-color
   terminals can't reproduce all GUI theme colors exactly.
 
 - **`EDITOR` and `MANPAGER` use the daemon too.** `Ctrl-g` in Claude, `git commit`,
-  `man` pages — these all connect to the same daemon. This is why they're instant, but
+  `man` pages -- these all connect to the same daemon. This is why they're instant, but
   it also means an Emacs crash would affect all of them simultaneously. The `KeepAlive`
   setting in the plist auto-restarts the daemon if this happens.
 
+- **Mouse escape sequence garbage on crash.** If emacsclient disconnects ungracefully,
+  you may see raw escape codes (e.g. `35;88;21M35;88;20M...`) dumped to the terminal.
+  This is cosmetic -- just press Enter or open a new terminal tab.
+
 ## Troubleshooting
 
-- **`emacsclient: can't find socket`** — daemon isn't running. The `-a ''` flag handles
+- **`emacsclient: can't find socket`** -- daemon isn't running. The `-a ''` flag handles
   this automatically, but you can also manually start it with the bootstrap command above.
-- **Plist path mismatch** — if you reinstall emacs-plus via brew, the binary path may
+- **Plist path mismatch** -- if you reinstall emacs-plus via brew, the binary path may
   change. Update the `ProgramArguments` in the plist to match the new location.
-- **Config changes not reflected** — see "Caveats" above. Use `SPC h r r` or restart
+- **Config changes not reflected** -- see "Caveats" above. Use `SPC h r r` or restart
   the daemon.
-- **Stale environment** — if a newly installed CLI tool isn't found from within Emacs,
+- **Stale environment** -- if a newly installed CLI tool isn't found from within Emacs,
   restart the daemon so `exec-path-from-shell` re-reads your PATH.
+- **Native comp errors in logs** -- if you see `emutls_w` or `native-ice` errors, native
+  comp JIT is trying to compile and failing. Ensure `native-comp-jit-compilation` is `nil`
+  in `config.el`, or fix the gcc/libgccjit toolchain.

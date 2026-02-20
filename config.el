@@ -40,6 +40,15 @@
 (load! "+org-minimal")
 (load! "+theme")
 
+;; Disable automatic workspace session save/restore
+(after! persp-mode
+  (setq persp-auto-save-opt 0)
+  (setq persp-auto-resume-time -1))
+
+;; Exclude workspace files from recentf (SPC f r)
+(after! recentf
+  (add-to-list 'recentf-exclude "/\\.config/emacs/\\.local/"))
+
 ;; Scroll behavior
 (setq scroll-margin 5)
 (setq scroll-conservatively most-positive-fixnum)

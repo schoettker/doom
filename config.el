@@ -133,3 +133,6 @@
 
 (require 'acp)
 (require 'agent-shell)
+
+(setq agent-shell-anthropic-default-model-id "claude-opus-4-6")
+(setq agent-shell-session-strategy 'prompt)

@@ -65,45 +65,6 @@
 
 (setq tool-bar-mode nil)
 
-;; Set initial frame size and position
-;; There are some approaches here https://www.reddit.com/r/emacs/comments/9c0a4d/tip_setting_initial_frame_size_and_position/
-;; But manually finding some sizes seems to work best for me
-;; For horizontal, 27":
-;; (setq default-frame-alist '((top . 70) (left . 70) (width . 200) (height . 50)))
-
-(add-hook 'c++-mode-hook
-          (lambda ()
-            (set (make-local-variable 'compile-command)
-                 (concat "g++ -std=c++17 " buffer-file-name))
-            (flycheck-mode -1)
-            ))
-
-
-(defun eshell-buffer-p (buffer)
-  (string-match-p "^\\*eshell*" (buffer-name buffer)))
-(push #'eshell-buffer-p doom-real-buffer-functions)
-
-(push '("\\*compilation\\*" . (nil (reusable-frames . t))) display-buffer-alist)
-
-
-(set-file-template!
-  "/codeforces/.+\\.cpp$"
-  :trigger
-  "sol")
-
-
-;; (defun compileandrun()
-;;   (interactive)
-;;   (let* ((src (file-name-nondirectory (buffer-file-name)))
-;;          (exe (file-name-sans-extension src)))
-;;     (compile (concat "g++ -std=c++17 " src " -o " exe " && timeout 1s ./" exe ))))
-
-;; (defun execute-c-program ()
-;;   (interactive)
-;;   (defvar foo)
-;;   (setq foo (concat "g++ " (buffer-name) " && ./a.out" ))
-;;   (shell-command foo))
-
 (defvar org-babel-default-header-args:cpp '((:flags . "-std=c++20")))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -111,18 +72,6 @@
 
 (use-package! exec-path-from-shell :config (exec-path-from-shell-initialize))
 
-
-;; (setq line-spacing 0.4)
-;; (face-remap-add-relative 'default :family "Iowan Old Style" :height 240)  ;; or some other font
-;; (visual-line-mode +1)
-;; (olivetti-mode +1)
-
-
-;; ressoures
-;; https://tecosaur.github.io/emacs-config/config.html#theme
-;; https://www.reddit.com/r/emacs/comments/hnf3cw/my_orgmode_agenda_much_better_now_with_category/
-;;         https://github.com/psamim/dotfiles/blob/master/doom/config.el#L73
-;; https://github.com/jacmoe/.doom.d/blob/master/config.el
 
 ;; Needs brew install git-delta
 ;; (setq initial-buffer-choice "~/org/world.org")

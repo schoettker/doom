@@ -3,7 +3,7 @@
 
 (package! ag)
 (package! winum)
-(package! gruvbox-theme)
+
 (package! exec-path-from-shell)
 (package! magit-delta :recipe (:host github :repo "dandavison/magit-delta"))
 

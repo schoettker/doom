@@ -25,7 +25,7 @@
 ;; (setq doom-theme 'doom-monokai-octagon)
 ;; (load-theme 'doom-monokai-octagon)
 ;; (setq doom-theme 'doom-tomorrow-day) ;; light theme
-(setq doom-theme 'doom-monokai-octagon)
+(setq doom-theme 'doom-gruvbox)
 
 (setq display-line-numbers-type 'relative)
 

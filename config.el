@@ -25,7 +25,7 @@
 ;; (setq doom-theme 'doom-monokai-octagon)
 ;; (load-theme 'doom-monokai-octagon)
 ;; (setq doom-theme 'doom-tomorrow-day) ;; light theme
-(setq doom-theme 'doom-xcode)
+(setq doom-theme 'doom-monokai-octagon)
 
 (setq display-line-numbers-type 'relative)
 
@@ -101,22 +101,36 @@
 (when (daemonp)
   (add-hook 'emacs-startup-hook
             (lambda ()
-              ;; Eagerly run Doom's deferred init hooks so they don't block
-              ;; on the first client connection.
-              (run-hooks 'doom-first-input-hook
-                         'doom-first-file-hook
-                         'doom-first-buffer-hook)
-              (doom-init-fonts-h)
-              (doom-init-theme-h)
-              (remove-hook 'pre-command-hook #'chain-doom-first-input-hook-to-pre-command-hook-h)
+              ;; Clear server-after-make-frame-hook — it contains blocking
+              ;; chainers that cause a blank screen + keypress wait.
               (setq server-after-make-frame-hook nil)
-              ;; Warm up: create and destroy a GUI frame so that all the
-              ;; first-frame initialization codepaths are exercised before
-              ;; the first emacsclient connects.
+              ;; Re-apply theme and fonts on each new client frame.
+              (add-hook 'after-make-frame-functions
+                        (lambda (frame)
+                          (with-selected-frame frame
+                            (doom-init-fonts-h)
+                            (doom-init-theme-h))))
+              ;; Fix: first file opened in a new session lands in
+              ;; fundamental-mode. Detect and re-apply correct mode.
+              (defvar doom-daemon--fix-mode-guard nil)
+              (defun doom-daemon--fix-fundamental-mode-h (_)
+                (when (and buffer-file-name
+                          (eq major-mode 'fundamental-mode)
+                          (not doom-daemon--fix-mode-guard))
+                  (let ((doom-daemon--fix-mode-guard t))
+                    (normal-mode))))
+              (add-hook 'window-buffer-change-functions
+                        #'doom-daemon--fix-fundamental-mode-h)
+              ;; Warm up: create an invisible frame, open a file, switch
+              ;; buffers — exercises all deferred hooks naturally.
               (let ((warmup-frame (make-frame '((visibility . nil)
                                                 (width . 80)
                                                 (height . 24)))))
-                (run-hooks 'server-after-make-frame-hook)
+                (with-selected-frame warmup-frame
+                  (find-file (expand-file-name "config.el" doom-user-dir))
+                  (switch-to-buffer "*scratch*")
+                  (kill-buffer (get-file-buffer
+                                (expand-file-name "config.el" doom-user-dir))))
                 (delete-frame warmup-frame)))
             100))
 

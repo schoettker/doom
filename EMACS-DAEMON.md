@@ -15,12 +15,20 @@ first frame is created and the first key is pressed. In daemon mode this means t
 first `emacsclient -nw` connection gets a blank screen and hangs until a keypress
 triggers all the deferred init.
 
-The fix (in `config.el`) is threefold:
-1. Eagerly run `doom-first-input-hook`, `doom-first-file-hook`, `doom-first-buffer-hook`
-   during daemon startup so deferred packages load immediately.
-2. Pre-initialize fonts and theme (`doom-init-fonts-h`, `doom-init-theme-h`).
-3. Create and immediately destroy an invisible GUI frame ("warmup frame") to exercise
-   all first-frame initialization codepaths before any real client connects.
+The fix (in `config.el`) has four essential pieces:
+
+1. **Clear `server-after-make-frame-hook`** — Doom populates this hook with blocking
+   "chainers" that wait for a keypress before completing initialization. Nilling the
+   hook prevents the blank-screen-waiting-for-keypress problem.
+2. **Re-apply theme/fonts on each new frame** via `after-make-frame-functions` — since
+   terminal frames are created fresh by each `emacsclient -nw` connection, the theme
+   and fonts must be applied per-frame.
+3. **Fundamental-mode fix** via `window-buffer-change-functions` — the first file opened
+   in a new session can land in `fundamental-mode` instead of the correct major mode.
+   A hook detects this and calls `normal-mode` to re-apply.
+4. **Warmup frame** — create and immediately destroy an invisible GUI frame during daemon
+   init. This exercises all of Doom's deferred first-frame codepaths (font init, theme
+   init, deferred package loading via `doom-first-*-hook`) before any real client connects.
 
 Additionally, `persp-mode` (workspaces) session persistence is disabled to prevent
 auto-save/restore of workspace layouts.
@@ -79,11 +87,10 @@ available from any terminal.
 ### 4. Daemon config in config.el
 
 The `(when (daemonp) ...)` block in `config.el` handles:
-- Eager hook execution (deferred init)
-- Font/theme pre-initialization
-- Warmup frame creation/destruction
-- Removal of blocking `pre-command-hook` chainers
-- Clearing `server-after-make-frame-hook`
+- Clearing `server-after-make-frame-hook` (removes blocking chainers)
+- Re-applying theme/fonts on each new client frame
+- Fixing fundamental-mode on first opened buffer
+- Warmup frame creation/destruction (exercises all deferred init)
 
 ## First boot after login
 
@@ -148,6 +155,14 @@ the daemon is ready and the warmup frame has already exercised all initializatio
 - **Mouse escape sequence garbage on crash.** If emacsclient disconnects ungracefully,
   you may see raw escape codes (e.g. `35;88;21M35;88;20M...`) dumped to the terminal.
   This is cosmetic -- just press Enter or open a new terminal tab.
+
+## Known Issues
+
+- **First file open requires double-RET.** The very first file you open after connecting
+  (e.g. selecting from dired or recentf) may silently fail — nothing happens until you
+  repeat the action. This is caused by a Doom hook (`+file-templates-check-h` or similar)
+  receiving a nil `buffer-file-name` during the first buffer transition. It's cosmetic and
+  only affects the first file open per session.
 
 ## Troubleshooting
 

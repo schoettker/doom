@@ -57,6 +57,12 @@
 (after! recentf
   (add-to-list 'recentf-exclude "/\\.config/emacs/\\.local/"))
 
+;; Force terminal cursor shape changes (block/bar/underline per evil state).
+;; The tty module's evil-terminal-cursor-changer doesn't detect Ghostty/Kitty
+;; when connecting via emacsclient to a daemon (env vars aren't inherited).
+;; Both terminals support xterm-style DECSCUSR sequences.
+(setq etcc-term-type-override 'xterm)
+
 ;; Scroll behavior
 (setq scroll-margin 5)
 (setq scroll-conservatively most-positive-fixnum)

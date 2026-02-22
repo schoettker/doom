@@ -67,6 +67,10 @@
         (:desc "win 4" :n "4" #'winum-select-window-4)
         (:desc "win 5" :n "5" #'winum-select-window-5)))
 
+;; Navigate git diff hunks with g] / g[
+(map! :nv "g]" #'+vc-gutter/next-hunk
+      :nv "g[" #'+vc-gutter/previous-hunk)
+
 ;; Export current candidates/results (like ivy-occur)
 (map! (:map minibuffer-local-map
             "C-c C-o" #'embark-export))

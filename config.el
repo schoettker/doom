@@ -63,6 +63,9 @@
 ;; Both terminals support xterm-style DECSCUSR sequences.
 (setq etcc-term-type-override 'xterm)
 
+;; Faster which-key popup (default 1.0s feels sluggish)
+(setq which-key-idle-delay 0.3)
+
 ;; Scroll behavior
 (setq scroll-margin 5)
 (setq scroll-conservatively most-positive-fixnum)

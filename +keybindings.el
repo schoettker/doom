@@ -13,12 +13,15 @@
 
       (:desc "prev buffer" :n "TAB" #'mode-line-other-buffer) ;; maybe evil-switch-to-window-last-buffer?!
       (:desc "go to char" :n "SPC" #'avy-goto-word-or-subword-1)
-      (:desc "swiper" :n "/" #'+default/search-buffer)
+      (:desc "search buffer" :n "/" #'+default/search-buffer)
       (:desc "kill buffer" :n "d" #'kill-this-buffer)
 
       (:desc "apps" :prefix "a"
        :desc "ag" :n "a" #'ag
        :desc "dired" :n "d" #'dired
+       :desc "imenu" :n "i" #'consult-imenu
+       :desc "outline" :n "o" #'consult-outline
+       :desc "ripgrep" :n "r" #'consult-ripgrep
        :desc "Terminal" :n "t" #'+vterm/here)
 
       (:desc "e" :prefix "e"
@@ -52,7 +55,7 @@
        :desc "add window config to register" :n "a" #'window-configuration-to-register
        :desc "maximize buffer" :n "m" #'doom/window-maximize-buffer)
 
-      (:desc "yank ring" :n "y" #'browse-kill-ring)
+      (:desc "yank pop" :n "y" #'consult-yank-pop)
 
       (:desc "z" :prefix "z"
        :desc "narrow" :n "n" #'narrow-to-region

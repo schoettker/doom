@@ -74,6 +74,8 @@
 (map! :nv "g]" #'+vc-gutter/next-hunk
       :nv "g[" #'+vc-gutter/previous-hunk)
 
-;; Export current candidates/results (like ivy-occur)
-(map! (:map minibuffer-local-map
+;; Embark — contextual actions
+(map! :n "C-;" #'embark-act         ; act on thing at point (normal mode)
+      (:map minibuffer-local-map
+            "C-." #'embark-act      ; act on minibuffer candidate
             "C-c C-o" #'embark-export))

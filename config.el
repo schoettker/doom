@@ -89,7 +89,7 @@
       '((yaml-mode . yaml-ts-mode)
         (bash-mode . bash-ts-mode)))
 
-(setq tool-bar-mode nil)
+(tool-bar-mode -1)
 
 (defvar org-babel-default-header-args:cpp '((:flags . "-std=c++20")))
 

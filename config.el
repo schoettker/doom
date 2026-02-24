@@ -1,7 +1,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Raise GC threshold to reduce pauses during editing (256MB)
-(setq gc-cons-threshold (* 256 1024 1024))
+;; Let Doom's gcmh manage GC — just tune the high-water mark (64MB)
+(setq gcmh-high-cons-threshold (* 64 1024 1024))
 
 (setq user-full-name "Lennart Schoettker"
       user-mail-address "lennartschoettker@hotmail.com")

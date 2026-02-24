@@ -130,6 +130,9 @@
                     (normal-mode))))
               (add-hook 'window-buffer-change-functions
                         #'doom-daemon--fix-fundamental-mode-h)
+              ;; Ensure persp-mode is loaded before any client connects
+              ;; (safe-persp-name is needed by +workspace-current-name).
+              (require 'persp-mode)
               ;; Warm up: create an invisible frame, open a file, switch
               ;; buffers — exercises all deferred hooks naturally.
               (let ((warmup-frame (make-frame '((visibility . nil)

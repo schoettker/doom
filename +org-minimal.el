@@ -2,21 +2,34 @@
 
 (after! org
   (setq org-startup-folded t)
-  (setq agenda-file (concat org-directory "agenda.org"))
+  (setq scratch-file (concat org-directory "scratch.org"))
   (setq archive-file (concat org-directory "archive.org"))
 
-  (setq org-agenda-files (list agenda-file))
+  ;; Archive
   (setq org-archive-location (concat archive-file "::* From %s"))
-
   (setq org-archive-reversed-order t)
 
+  ;; Capture: dump everything into scratch.org
   (setq org-capture-templates
-        '(
-          ("a" "auto")
-          ("aj" "Auto Journal" plain (file+olp+datetree journal-file) (file "~/library/org-brain/dailyplan-template.txt") :immediate-finish t :jump-to-captured t)
-          ("j" "Agenda" entry (file+olp+datetree agenda-file) "* %?\n%i\n" :jump-to-captured t)))
+        '(("s" "Scratch" entry (file scratch-file) "* %?\n%i\n" :jump-to-captured t)
+          ("S" "Scratch (link)" entry (file scratch-file) "* %?\n%a\n%i\n" :jump-to-captured t)
+          ("l" "Link" item (file+headline scratch-file "Links") "- %?\n" :jump-to-captured t)))
 
+  ;; Refile: any top-level heading in org/ (excluding roam)
+  (setq org-refile-targets
+        '((nil :maxlevel . 2)  ; current buffer up to level 2
+          (org-refile-files :maxlevel . 1)))  ; other files top-level only
 
+  (defun org-refile-files ()
+    "Return list of org files for refile targets (excluding roam/)."
+    (seq-remove
+     (lambda (f) (string-match-p "/roam/" f))
+     (directory-files-recursively org-directory "\\.org$")))
+
+  (setq org-refile-use-outline-path 'file)  ; show file path in refile menu
+  (setq org-outline-path-complete-in-steps nil)  ; fuzzy match full path
+
+  ;; TODO keywords
   (setq org-todo-keywords (quote((sequence "TODO⚑" "SOMEDAY⚐" "IN-PROGRESS/WAITING⚐" "|" "DONE✔" "CANCELED✘"))))
   (setq org-todo-keyword-faces
         '(("TODO⚑" . "deep sky blue")

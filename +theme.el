@@ -33,9 +33,9 @@
 (after! diff-hl
   (set-face-attribute 'diff-hl-insert nil :foreground "#b8bb26" :background "#282e24")
   (set-face-attribute 'diff-hl-delete nil :foreground "#fb4934" :background "#2e2828")
-  (set-face-attribute 'diff-hl-change nil :foreground "#83a598" :background "#282c2e"))
+  (set-face-attribute 'diff-hl-change nil :foreground "#66b9ff" :background "#4683b7"))
 
 (after! diff-hl-margin
   (set-face-attribute 'diff-hl-margin-insert nil :foreground "#b8bb26" :background "#282e24")
   (set-face-attribute 'diff-hl-margin-delete nil :foreground "#fb4934" :background "#2e2828")
-  (set-face-attribute 'diff-hl-margin-change nil :foreground "#83a598" :background "#282c2e"))
+  (set-face-attribute 'diff-hl-margin-change nil :foreground "#66b9ff" :background "#4683b7"))

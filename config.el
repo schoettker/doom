@@ -48,6 +48,7 @@
 (load! "+functions")
 (load! "+keybindings")
 (load! "+org-minimal")
+(load! "+org-modern")
 (load! "+theme")
 
 ;; Disable workspace session persistence (no auto-save/restore).

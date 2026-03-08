@@ -34,14 +34,6 @@
       (:desc "git" :prefix "g"
        :desc "file diff" :n "d" #'magit-diff-buffer-file
        :desc "buffer log" :n "l" #'magit-log-buffer-file
-       :desc "review PR" :n "r" (cmd! (let ((pr (read-string "PR #: ")))
-                                         (async-shell-command (format "gh pr checkout %s" pr) "*gh-pr*")
-                                         (set-process-sentinel
-                                          (get-buffer-process "*gh-pr*")
-                                          (lambda (_proc event)
-                                            (when (string-match-p "finished" event)
-                                              (magit-status)
-                                              (magit-diff-range "master..HEAD"))))))
        :desc "status" :n "s" #'magit-status)
 
       (:desc "open" :prefix "o"

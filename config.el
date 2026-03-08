@@ -107,6 +107,41 @@
 (use-package! magit-delta
   :hook (magit-mode . magit-delta-mode))
 
+;; Magit performance tuning (helps on large monorepos)
+(after! magit
+  ;; Don't auto-refresh status buffer on every file save — use `gr` to refresh manually.
+  ;; Big perf win in large repos where refresh triggers expensive git operations.
+  (setq magit-refresh-status-buffer nil)
+
+  ;; Skip computing related refs in commit views (expensive in repos with many refs)
+  (setq magit-revision-insert-related-refs nil)
+
+  ;; Trim status buffer headers: remove tags (slow) and recent commits (expensive)
+  (setq magit-status-headers-hook
+        '(magit-insert-error-header
+          magit-insert-diff-filter-header
+          magit-insert-head-branch-header
+          magit-insert-upstream-branch-header
+          magit-insert-push-branch-header))
+
+  ;; Trim status sections: remove recent-commits and unpushed/unpulled sections
+  ;; that scan the full DAG. Keep untracked/unstaged/staged which are always fast.
+  (setq magit-status-sections-hook
+        '(magit-insert-status-headers
+          magit-insert-merge-log
+          magit-insert-rebase-sequence
+          magit-insert-am-sequence
+          magit-insert-sequencer-sequence
+          magit-insert-bisect-output
+          magit-insert-bisect-rest
+          magit-insert-bisect-log
+          magit-insert-untracked-files
+          magit-insert-unstaged-changes
+          magit-insert-staged-changes
+          magit-insert-stashes
+          magit-insert-unpushed-to-pushremote
+          magit-insert-unpushed-to-upstream)))
+
 ;; (setq +doom-dashboard-pwd-policy "~")
 
 (use-package! acp :defer t)

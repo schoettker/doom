@@ -77,7 +77,7 @@
       :nv "g[" #'+vc-gutter/previous-hunk)
 
 ;; Embark — contextual actions
-(map! :n "C-;" #'embark-act         ; act on thing at point (normal mode)
+(map! :n "C-`" #'embark-act         ; act on thing at point (normal mode)
       (:map minibuffer-local-map
-            "C-." #'embark-act      ; act on minibuffer candidate
+            "C-`" #'embark-act      ; act on minibuffer candidate
             "C-c C-o" #'embark-export))

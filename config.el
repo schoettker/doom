@@ -153,4 +153,9 @@
   (setq agent-shell-session-strategy 'prompt))
 
 
+;; pgmacs — interactive Postgres browser
+(use-package! pgmacs
+  :defer t
+  :commands pgmacs)
+
 (setq initial-buffer-choice "~/org/dashboard.org")

@@ -22,7 +22,8 @@
        :desc "imenu" :n "i" #'consult-imenu
        :desc "outline" :n "o" #'consult-outline
        :desc "ripgrep" :n "r" #'consult-ripgrep
-       :desc "Terminal" :n "t" #'+vterm/here)
+       :desc "Terminal" :n "t" #'+vterm/here
+       :desc "database" :n "D" #'pgmacs)
 
       (:desc "e" :prefix "e"
        :desc "next error" :n "n" #'flycheck-next-error

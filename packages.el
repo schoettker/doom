@@ -11,6 +11,8 @@
 (package! acp)
 (package! agent-shell)
 
+;; Database
+(package! pgmacs :recipe (:host github :repo "emarsden/pgmacs"))
 ;; Org modernization
 (package! org-modern)
 (package! visual-fill-column)

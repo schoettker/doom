@@ -153,6 +153,41 @@
   (setq agent-shell-session-strategy 'prompt))
 
 
+;; difftastic — structural diffs in magit
+(use-package! difftastic
+  :defer t
+  :config
+  ;; Strip background colors — use only foreground for added/removed
+  (setq difftastic-normal-colors-vector
+        (vector
+         (aref ansi-color-normal-colors-vector 0) ; black
+         'diff-indicator-removed                   ; red (no bg)
+         'diff-indicator-added                     ; green (no bg)
+         (aref ansi-color-normal-colors-vector 3)  ; yellow
+         (aref ansi-color-normal-colors-vector 4)  ; blue
+         (aref ansi-color-normal-colors-vector 5)  ; magenta
+         (aref ansi-color-normal-colors-vector 6)  ; cyan
+         (aref ansi-color-normal-colors-vector 7))) ; white
+  (setq difftastic-bright-colors-vector
+        (vector
+         (aref ansi-color-bright-colors-vector 0)
+         'diff-indicator-removed
+         'diff-indicator-added
+         (aref ansi-color-bright-colors-vector 3)
+         (aref ansi-color-bright-colors-vector 4)
+         (aref ansi-color-bright-colors-vector 5)
+         (aref ansi-color-bright-colors-vector 6)
+         (aref ansi-color-bright-colors-vector 7)))
+  (setq difftastic-highlight-alist nil)
+  ;; Force side-by-side and use full frame width
+  ;; (setq difftastic-requested-window-width-function
+  ;;       (lambda () (frame-width)))
+  :init
+  (after! magit-diff
+    (transient-append-suffix 'magit-diff '(-1 -1)
+      [("D" "Difftastic diff (dwim)" difftastic-magit-diff)
+       ("S" "Difftastic show" difftastic-magit-show)])))
+
 ;; pgmacs — interactive Postgres browser
 (use-package! pgmacs
   :defer t

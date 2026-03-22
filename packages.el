@@ -11,6 +11,9 @@
 (package! acp)
 (package! agent-shell)
 
+;; Structural diffs
+(package! difftastic :recipe (:host github :repo "pkryger/difftastic.el"))
+
 ;; Database
 (package! pgmacs :recipe (:host github :repo "emarsden/pgmacs"))
 

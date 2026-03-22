@@ -13,6 +13,10 @@
 
 ;; Database
 (package! pgmacs :recipe (:host github :repo "emarsden/pgmacs"))
+
+;; Auto-commit org files on save
+(package! git-auto-commit-mode)
+
 ;; Org modernization
 (package! org-modern)
 (package! visual-fill-column)

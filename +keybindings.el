@@ -34,6 +34,8 @@
       (:desc "git" :prefix "g"
        :desc "file diff" :n "d" #'magit-diff-buffer-file
        :desc "buffer log" :n "l" #'magit-log-buffer-file
+       :desc "PR diff" :n "D" #'lschoettker/magit-pr-diff
+       :desc "PR log" :n "L" #'lschoettker/magit-pr-log
        :desc "status" :n "s" #'magit-status)
 
       (:desc "open" :prefix "o"

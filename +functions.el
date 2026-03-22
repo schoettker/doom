@@ -18,6 +18,17 @@
   "Return the current line number in the buffer."
   (line-number-at-pos))
 
+(defun lschoettker/magit-pr-diff ()
+  "Show diff of current branch against origin/master (PR view)."
+  (interactive)
+  (magit-diff-range (concat "origin/master..." (magit-get-current-branch))
+                    '("--stat")))
+
+(defun lschoettker/magit-pr-log ()
+  "Show commit log of current branch against origin/master."
+  (interactive)
+  (magit-log-other (list (concat "origin/master.." (magit-get-current-branch)))))
+
 (defvar lschoettker/work-projects
   '(("dynamic-user-reporting-forms"
      :path "~/work/dynamic-user-reporting-forms"

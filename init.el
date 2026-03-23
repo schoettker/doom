@@ -14,6 +14,9 @@
 ;;   Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;   directory (for easy access to its source code).
 
+;; Must be set before Evil loads — makes j/k move by visual (screen) lines
+(setq evil-respect-visual-line-mode t)
+
 (doom! :input
        ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
        ;;chinese

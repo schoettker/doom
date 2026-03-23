@@ -69,6 +69,9 @@
 ;; Faster which-key popup (default 1.0s feels sluggish)
 (setq which-key-idle-delay 0.3)
 
+;; Enable visual-line-mode globally so j/k navigate by screen lines
+(global-visual-line-mode +1)
+
 ;; Scroll behavior
 (setq scroll-margin 5)
 (setq scroll-conservatively most-positive-fixnum)

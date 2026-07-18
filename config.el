@@ -159,12 +159,6 @@
 (after! projectile
   (setq projectile-switch-project-action #'projectile-dired))
 
-;; Forge against Spotify GHE (token: ~/.authinfo entry for ghe.spotify.net)
-(after! forge
-  (add-to-list 'forge-alist
-               '("ghe.spotify.net" "ghe.spotify.net/api/v3"
-                 "ghe.spotify.net" forge-github-repository)))
-
 ;; difftastic — structural diffs in magit
 (use-package! difftastic
   :defer t

@@ -204,4 +204,15 @@
   :defer t
   :commands pgmacs)
 
-(setq initial-buffer-choice "~/org/dashboard.org")
+
+;; (use-package! evil-ghostel
+;;   :after (ghostel evil)
+;;   :hook (ghostel-mode . evil-ghostel-mode)
+;;   :init
+;;   (setq evil-ghostel-escape 'evil)
+;;   :config
+;;   (add-hook! 'ghostel-mode-hook
+;;     (evil-local-set-key 'normal (kbd "C-u")
+;;                         (cmd! (ghostel--send-encoded "page_up" "")))
+;;     (evil-local-set-key 'normal (kbd "C-d")
+;;                         (cmd! (ghostel--send-encoded "page_down" "")))))

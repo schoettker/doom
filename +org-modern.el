@@ -1,11 +1,11 @@
 ;;; +org-modern.el --- Paper-like org-mode appearance -*- lexical-binding: t; -*-
 
-;; Constrain org buffers to a readable width, centered like a document
-(use-package! visual-fill-column
-  :hook (org-mode . visual-fill-column-mode)
-  :init
-  (setq-default visual-fill-column-width 90
-                visual-fill-column-center-text t))
+;; visual-fill-column disabled — was constraining table width
+;; (use-package! visual-fill-column
+;;   :hook (org-mode . visual-fill-column-mode)
+;;   :init
+;;   (setq-default visual-fill-column-width 100
+;;                 visual-fill-column-center-text t))
 
 ;; Soft-wrap lines within the fill column
 (add-hook 'org-mode-hook #'visual-line-mode)
@@ -36,10 +36,10 @@
         org-appear-delay 0.2))
 
 ;; Left margin padding for a bit of breathing room from the window edge
-(add-hook 'org-mode-hook (lambda ()
-                           (setq-local left-margin-width 2
-                                       right-margin-width 2)
-                           (set-window-buffer nil (current-buffer))))
+;; (add-hook 'org-mode-hook (lambda ()
+;;                            (setq-local left-margin-width 1
+;;                                        right-margin-width 1)
+;;                            (set-window-buffer nil (current-buffer))))
 
 ;; org-modern: sleek bullets, tables, and block styling
 (use-package! org-modern
@@ -50,8 +50,7 @@
         org-modern-checkbox '((?X . "☑") (?- . "◧") (?\s . "☐"))
         org-modern-block-fringe nil
         org-modern-block-name '("" . "")
-        org-modern-table-vertical 1
-        org-modern-table-horizontal 0.2
+        org-modern-table nil
         org-modern-horizontal-rule "──────────────────────────────────────────"
         org-modern-todo t
         org-modern-tag t
@@ -78,7 +77,7 @@
   '(org-block-end-line   :inherit fixed-pitch :foreground "#7c6f64" :background "#282828" :extend t :height 0.85)
   '(org-code             :inherit fixed-pitch :foreground "#fe8019" :background "#1d2021")
   '(org-verbatim         :inherit fixed-pitch :foreground "#8ec07c" :background "#1d2021")
-  '(org-table            :inherit fixed-pitch :foreground "#d5c4a1"))
+  '(org-table            :inherit fixed-pitch :foreground "#d5c4a1" :height 0.8))
 
 ;; Dim metadata so content stands out
 (custom-set-faces!

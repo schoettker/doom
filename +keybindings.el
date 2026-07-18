@@ -42,7 +42,10 @@
       (:desc "open" :prefix "o"
        :desc "open config" :n "c" #'doom/open-private-config
        :desc "search org folder files" :n "o" #'+default/find-in-notes
-       :desc "Terminal" :n "t" #'+vterm/here)
+       :desc "Terminal" :n "t" #'+vterm/here
+       (:desc "worktree" :prefix "w"
+        :desc "new/switch" :n "n" #'lschoettker/sp-new
+        :desc "remove" :n "r" #'lschoettker/sp-rm))
 
       (:desc "Project" :prefix "p"
        :desc "search in project" :n "/" #'+default/search-project

@@ -153,8 +153,8 @@ PROJECT-NAME should be one of the keys from `lschoettker/work-projects'."
 (defun lschoettker/sp-new (name &optional branch)
   "Create a services-pilot worktree NAME via sp-new and switch to it.
 Runs sp-new asynchronously; on success adds the worktree to projectile,
-switches to a workspace named NAME, and opens magit-status there. The spt
-bookkeeping keeps running in the background (see /tmp/sp-new-NAME.spt.log).
+switches to a workspace named NAME, and opens a ghostel terminal there. The
+spt bookkeeping keeps running in the background (/tmp/sp-new-NAME.spt.log).
 With prefix arg, also prompt for BRANCH (sp-new defaults it to NAME)."
   (interactive
    (let ((name (string-trim (read-string "Worktree name: "))))
@@ -184,7 +184,8 @@ With prefix arg, also prompt for BRANCH (sp-new defaults it to NAME)."
                (message "sp-new %s failed - see %s" name (buffer-name)))
            (projectile-add-known-project (file-name-as-directory target))
            (+workspace-switch name t)
-           (magit-status target)
+           (let ((default-directory (file-name-as-directory target)))
+             (+ghostel/here))
            (message "sp-new %s: ready (spt bookkeeping in background)"
                     name)))))))
 

@@ -220,3 +220,46 @@ the matching workspace and forgets the projectile project."
             (+workspace-delete name))
           (projectile-remove-known-project (file-name-as-directory target))
           (message "%s" (string-trim (buffer-string))))))))
+
+(defvar-local lschoettker/sp--compile-worktree nil
+  "Worktree root of a bazel build started by `lschoettker/sp-compile'.")
+
+(defun lschoettker/sp--default-bazel-target ()
+  "Guess a bazel target pattern from the current buffer's path."
+  (when-let* ((root (doom-project-root))
+              (file (or buffer-file-name default-directory))
+              (rel (file-relative-name file root)))
+    (unless (string-prefix-p ".." rel)
+      (let ((parts (split-string rel "/" t)))
+        (when (>= (length parts) 2)
+          (format "//%s/%s/..." (nth 0 parts) (nth 1 parts)))))))
+
+(defun lschoettker/sp-compile (target)
+  "Run bazel build TARGET in the current project via `compilation-mode'.
+If the build fails on missing packages (Tier-1 sparse checkout), offers to
+run \"spt git:sparse resolve-dependencies\" to escalate the worktree to
+Tier 2, then re-run the build."
+  (interactive
+   (list (read-string "Bazel target: " (lschoettker/sp--default-bazel-target))))
+  (let ((default-directory (or (doom-project-root) default-directory))
+        (compilation-buffer-name-function
+         (lambda (&rest _) (format "*bazel: %s*" (+workspace-current-name)))))
+    (with-current-buffer (compile (format "bazel build %s" target))
+      (setq lschoettker/sp--compile-worktree default-directory))))
+
+(defun lschoettker/sp--offer-resolve-deps (buffer status)
+  "Offer Tier-2 dep resolution when a sp-compile BUFFER failed on packages.
+STATUS is the compilation exit description."
+  (when (and (buffer-local-value 'lschoettker/sp--compile-worktree buffer)
+             (not (string-match-p "finished" status))
+             (with-current-buffer buffer
+               (save-excursion
+                 (goto-char (point-min))
+                 (re-search-forward "no such package" nil t))))
+    (if (y-or-n-p "Missing packages (Tier-1 checkout) - run spt git:sparse resolve-dependencies? ")
+        (let ((default-directory
+               (buffer-local-value 'lschoettker/sp--compile-worktree buffer)))
+          (compile "spt git:sparse resolve-dependencies"))
+      (message "Tip: add single dirs with spt git:sparse add --no-resolve-deps <dir>"))))
+
+(add-to-list 'compilation-finish-functions #'lschoettker/sp--offer-resolve-deps)

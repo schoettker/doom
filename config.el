@@ -156,13 +156,14 @@
   (setq agent-shell-session-strategy 'prompt))
 
 
-;; Register monorepo subdirectories as standalone projects
 (after! projectile
-  (dolist (dir '("~/work/services-pilot/policy-enforcement-and-governance/notification/notification"
-                 "~/work/services-pilot/policy-enforcement-and-governance/appeals"
-                 ;; Add more paths here
-                 ))
-    (projectile-add-known-project dir)))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+;; Forge against Spotify GHE (token: ~/.authinfo entry for ghe.spotify.net)
+(after! forge
+  (add-to-list 'forge-alist
+               '("ghe.spotify.net" "ghe.spotify.net/api/v3"
+                 "ghe.spotify.net" forge-github-repository)))
 
 ;; difftastic — structural diffs in magit
 (use-package! difftastic

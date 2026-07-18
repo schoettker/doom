@@ -151,11 +151,15 @@ PROJECT-NAME should be one of the keys from `lschoettker/work-projects'."
       (expand-file-name name "~/.local/bin")))
 
 (defun lschoettker/sp--switch-to (name target)
-  "Switch to worktree TARGET in a workspace named NAME with a ghostel terminal."
+  "Switch to worktree TARGET in a workspace named NAME with dired + ghostel."
   (projectile-add-known-project (file-name-as-directory target))
   (+workspace-switch name t)
   (let ((default-directory (file-name-as-directory target)))
-    (+ghostel/here)))
+    (delete-other-windows)
+    (dired default-directory)
+    (let ((right (split-window-right)))
+      (select-window right)
+      (+ghostel/here))))
 
 (defun lschoettker/sp-new (name &optional branch)
   "Create or switch to a services-pilot worktree NAME.

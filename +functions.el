@@ -132,3 +132,82 @@ PROJECT-NAME should be one of the keys from `lschoettker/work-projects'."
       (user-error "Project not found: %s" project-name))
     (lschoettker/setup-project-layout project-config)
     (message "Work project workspace setup complete for %s" project-name)))
+
+;;; services-pilot worktrees (sp-new / sp-rm) --------------------------------
+
+(defvar lschoettker/sp-root "~/src/services-pilot"
+  "Root directory holding services-pilot worktrees.")
+
+(defun lschoettker/sp--worktrees ()
+  "Names of existing worktrees under `lschoettker/sp-root', excluding master."
+  (let ((root (expand-file-name lschoettker/sp-root)))
+    (delete "master"
+            (mapcar #'file-name-nondirectory
+                    (seq-filter #'file-directory-p
+                                (directory-files root t "^[^.]"))))))
+
+(defun lschoettker/sp--script (name)
+  (or (executable-find name)
+      (expand-file-name name "~/.local/bin")))
+
+(defun lschoettker/sp-new (name &optional branch)
+  "Create a services-pilot worktree NAME via sp-new and switch to it.
+Runs sp-new asynchronously; on success adds the worktree to projectile,
+switches to a workspace named NAME, and opens magit-status there. The spt
+bookkeeping keeps running in the background (see /tmp/sp-new-NAME.spt.log).
+With prefix arg, also prompt for BRANCH (sp-new defaults it to NAME)."
+  (interactive
+   (let ((name (string-trim (read-string "Worktree name: "))))
+     (list name
+           (when current-prefix-arg
+             (read-string (format "Branch (default %s): " name)
+                          nil nil name)))))
+  (when (string-empty-p name)
+    (user-error "Worktree name required"))
+  (let ((target (expand-file-name name lschoettker/sp-root))
+        (buffer (get-buffer-create (format "*sp-new: %s*" name))))
+    (when (file-directory-p target)
+      (user-error "Worktree already exists: %s" target))
+    (with-current-buffer buffer
+      (let ((inhibit-read-only t)) (erase-buffer)))
+    (message "sp-new %s: creating worktree..." name)
+    (make-process
+     :name (concat "sp-new-" name)
+     :buffer buffer
+     :command (delq nil (list (lschoettker/sp--script "sp-new") name branch))
+     :sentinel
+     (lambda (proc _event)
+       (when (memq (process-status proc) '(exit signal))
+         (if (/= (process-exit-status proc) 0)
+             (progn
+               (pop-to-buffer (process-buffer proc))
+               (message "sp-new %s failed - see %s" name (buffer-name)))
+           (projectile-add-known-project (file-name-as-directory target))
+           (+workspace-switch name t)
+           (magit-status target)
+           (message "sp-new %s: ready (spt bookkeeping in background)"
+                    name)))))))
+
+(defun lschoettker/sp-rm (name &optional force)
+  "Remove services-pilot worktree NAME via sp-rm.
+With prefix arg, pass -f (force removal of a dirty worktree). Also deletes
+the matching workspace and forgets the projectile project."
+  (interactive
+   (list (completing-read "Remove worktree: " (lschoettker/sp--worktrees)
+                          nil t)
+         current-prefix-arg))
+  (let ((target (expand-file-name name lschoettker/sp-root)))
+    (unless (yes-or-no-p (format "Remove worktree %s and its branch? " name))
+      (user-error "Aborted"))
+    (with-temp-buffer
+      (let ((status (apply #'call-process (lschoettker/sp--script "sp-rm")
+                           nil t nil
+                           (delq nil (list name (when force "-f"))))))
+        (if (/= status 0)
+            (error "sp-rm failed: %s" (string-trim (buffer-string)))
+          (when (equal (+workspace-current-name) name)
+            (+workspace-switch +workspaces-main t))
+          (when (+workspace-exists-p name)
+            (+workspace-delete name))
+          (projectile-remove-known-project (file-name-as-directory target))
+          (message "%s" (string-trim (buffer-string))))))))

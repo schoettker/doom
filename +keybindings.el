@@ -22,7 +22,7 @@
        :desc "imenu" :n "i" #'consult-imenu
        :desc "outline" :n "o" #'consult-outline
        :desc "ripgrep" :n "r" #'consult-ripgrep
-       :desc "Terminal" :n "t" #'+vterm/here
+       :desc "Terminal" :n "t" #'+ghostel/here
        :desc "database" :n "D" #'pgmacs)
 
       (:desc "e" :prefix "e"
@@ -56,7 +56,7 @@
        :desc "switch project" :n "s" #'projectile-switch-project)
 
       (:desc "Toggles" :prefix "t"
-       :desc "Terminal" :n "t" #'+vterm/here)
+       :desc "Terminal" :n "t" #'+ghostel/here)
 
       (:desc "window" :prefix "w"
        :desc "add window config to register" :n "a" #'window-configuration-to-register

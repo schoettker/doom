@@ -201,14 +201,21 @@
   :commands pgmacs)
 
 
-;; (use-package! evil-ghostel
-;;   :after (ghostel evil)
-;;   :hook (ghostel-mode . evil-ghostel-mode)
-;;   :init
-;;   (setq evil-ghostel-escape 'evil)
-;;   :config
-;;   (add-hook! 'ghostel-mode-hook
-;;     (evil-local-set-key 'normal (kbd "C-u")
-;;                         (cmd! (ghostel--send-encoded "page_up" "")))
-;;     (evil-local-set-key 'normal (kbd "C-d")
-;;                         (cmd! (ghostel--send-encoded "page_down" "")))))
+(setq evil-ghostel-escape 'evil)
+(add-hook! 'ghostel-mode-hook
+  (evil-local-set-key 'normal (kbd "C-u")
+                      (cmd! (ghostel--send-encoded "prior" "")))
+  (evil-local-set-key 'normal (kbd "C-d")
+                      (cmd! (ghostel--send-encoded "next" ""))))
+(after! evil-ghostel
+  (evil-define-key* 'insert evil-ghostel-mode-map
+    (kbd "S-<return>") #'ghostel--send-event
+    (kbd "M-1") #'+workspace/switch-to-0
+    (kbd "M-2") #'+workspace/switch-to-1
+    (kbd "M-3") #'+workspace/switch-to-2
+    (kbd "M-4") #'+workspace/switch-to-3
+    (kbd "M-5") #'+workspace/switch-to-4
+    (kbd "M-6") #'+workspace/switch-to-5
+    (kbd "M-7") #'+workspace/switch-to-6
+    (kbd "M-8") #'+workspace/switch-to-7
+    (kbd "M-9") #'+workspace/switch-to-8))

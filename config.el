@@ -146,6 +146,7 @@
           magit-insert-unpushed-to-upstream)))
 
 ;; (setq +doom-dashboard-pwd-policy "~")
+(setq fancy-splash-image (expand-file-name "xemacs_color_pine.svg" doom-user-dir))
 
 (use-package! acp :defer t)
 (use-package! agent-shell
